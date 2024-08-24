@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Outfit;
+  box-sizing: border-box;
+}
+:root {
+  --first-color: #3c3c3c;
+  --second-color: #d3711a;
+  --hover-color: #fc7753;
+  --white-color: #ffff;
+}
+body {
+  min-height: 100vh;
+  background: #fcfcfc;
+}
+a {
+  background: inherit;
+  text-decoration: none;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--hover-color);
+}
+.app-content {
+  display: flex;
+}
+
+.div-container {
+  background-color: #f1eded;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+.heading-text {
+  color: var(--hover-color);
+  border-bottom: 2px solid var(--hover-color);
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 5vmin;
+  padding: 3px 0;
+  margin: 7px;
+  cursor: none;
+}
+.btn-success {
+  background-color: var(--hover-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border: transparent;
+}
+.btn-success:hover {
+  background-color: var(--first-color);
+}
+.upload-food-image {
+  margin: 10px 50px;
+  height: 150px;
+  width: 250px;
+}
+.uploadimg{
+  margin: 10px 10px;
+
+}
+.loading-screen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(198, 123, 16, 0.246); 
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.img-thumbnails{
+  height: 30vmin;
+}
+.icon-delete{
+  transition: all .5s;
+}
+.icon-delete:hover{
+  color: red;
+}

@@ -1,0 +1,61 @@
+:root {
+  --first-color: #3c3c3c;
+  --second-color: #d3711a;
+  --hover-color: #fc7753;
+  --white-color: #ffff;
+}
+.sidebar {
+  min-height: 80vh;
+  background-color: #f1eded;
+  border-radius: 1vmin;
+  padding: 1vmin;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  font-size: max(1vw, 15px);
+}
+.sidebar-options {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 7px;
+  margin: 7px 5px;
+  padding: 1vmin;
+  color: black;
+  background-color: var(--white-color);
+  transition: all 0.2s;
+  cursor: pointer;
+
+}
+
+.sidebar-options:hover {
+  background-color: var(--hover-color);
+  color: white;
+}
+
+
+.activebtn {
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  background: #fc7753!important;
+  color: black;
+  font-weight: 500;
+}
+
+.sidebar-option img {
+  height: 40px;
+  width: 40px;
+}
+
+.sidebar-option p {
+margin-left: 6px;
+margin-top: 16px;
+}
+
+@media (max-width: 900px) {
+  .sidebar-option p {
+    display: none;
+  }
+  .sidebar {
+    min-height: auto; 
+  }
+  .sidebar-option img {
+    height:30px;
+    width: 30px;
+  }
+}
