@@ -4,6 +4,8 @@ import Layout from './Components/Layout'
 import AddFood from './Pages/AddFood/AddFood'
 import ListFoods from './Pages/ListFoods/ListFoods'
 import Orders from './Pages/Orders/Orders'
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify'
 const App = () => {
   const routes = createBrowserRouter(
     createRoutesFromElements(
@@ -17,6 +19,7 @@ const App = () => {
   return (
     <div>
       <RouterProvider router={routes} />
+      <ToastContainer />
     </div>
   )
 }
