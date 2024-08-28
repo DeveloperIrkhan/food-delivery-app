@@ -1,0 +1,21 @@
+.cart-image {
+  width: 198px;
+  height: 119px;
+}
+.cart-images {
+  width: 198px;
+  height: 119px;
+}
+.inc-button {
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  background: var(--hover-color);
+  border: none;
+  color: white;
+}
+.increment-quantity{
+    margin: auto;
+    /* margin-right: 10px; */
+    /* margin-bottom: 10px; */
+}

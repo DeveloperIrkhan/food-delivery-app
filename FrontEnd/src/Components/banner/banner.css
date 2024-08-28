@@ -1,0 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Alex+Brush&display=swap");
+
+.banner-image {
+  background-image: url("../../assets/banner-Image.jpg");
+  height: 100vmin;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed!important;
+}
+
+.banner-text {
+  position: absolute;
+  left: 0;
+  top: 30%;
+  right: 0;
+}
+.banner-heading {
+  color: #143642;
+  font-size: 15vmin;
+  letter-spacing: 14px;
+}
+.banner-welcome {
+  color: white;
+  font-size: 5vmin;
+  font-family: "Alex Brush", cursive;
+}

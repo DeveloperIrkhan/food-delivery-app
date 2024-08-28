@@ -1,0 +1,68 @@
+:root {
+  --first-color: #3c3c3c;
+  --second-color: #d3711a;
+  --hover-color: #fc7753;
+  --white-color: #ffff;
+  --heading-Fonts: 25px;
+  --normal-fonts: 18px;
+}
+.full-logo {
+  height: 90px;
+  padding: 4px;
+}
+.profile-img {
+  height: 30px;
+}
+.cart-img {
+  height: 40px;
+}
+.navbar {
+  background-color: transparent;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1; /* Ensures navbar is above the banner */
+  box-shadow: none; /* Remove box shadow */
+}
+.navbar-menu {
+  list-style: none;
+  font-size: var(--normal-fonts);
+}
+.navbar-menu NavLink {
+  padding: 7px;
+  transition: all 0.5s;
+  border-radius: 17px;
+  cursor: pointer;
+}
+.navbar-menu NavLink:hover {
+  background-color: var(--second-color);
+  border-radius: 17px;
+  color: white;
+}
+.under-line {
+  border-bottom: 2px solid var(--hover-color);
+  color: white;
+
+}
+.active-link {
+  background-color: var(--second-color);
+  border-radius: 17px;
+  color: white;
+
+}
+.navbar-button {
+  background-color: transparent;
+  border: 1px solid var(--second-color);
+  padding: 7px 16px;
+  font-size: var(--normal-fonts);
+  border-radius: 50px;
+  color: var(--second-color);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.navbar-button:hover {
+  background-color: var(--second-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
+}

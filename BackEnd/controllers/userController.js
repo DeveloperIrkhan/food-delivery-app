@@ -1,9 +1,61 @@
 import userModel from "../models/userModel.js";
 import validator from "validator";
-import { createToken, PasswordHashing } from "../helpers/authHelper.js";
+import {
+  ComparePasswordAsync,
+  createToken,
+  PasswordHashing,
+} from "../helpers/authHelper.js";
+import { userRoleEnums } from "../Enums/userRolesEnums.js";
 
 //Login User
-const UserSignInController = async (req, res) => {};
+const UserSignInController = async (req, res) => {
+  try {
+    const { username, password } = req.body;
+    if (!username || !password) {
+      return res
+        .status(404)
+        .send({ message: "pelase enter username and password" });
+    }
+    // checking user exsisting
+    const IsExistingUser = await userModel.findOne({ email: username });
+    if (!IsExistingUser) {
+      return res.status(404).send({
+        success: false,
+        message: `this user ${username} is not registered yet`,
+      });
+    }
+    // checking password comparing
+    const IsPasswordMatched = await ComparePasswordAsync(
+      password,
+      IsExistingUser.password
+    );
+    if (!IsPasswordMatched) {
+      return res.status(404).send({
+        success: false,
+        message: "password doesn't matched....",
+      });
+    }
+    // generating new token
+    const token = createToken(IsExistingUser._id);
+    return res.status(200).send({
+      success: true,
+      message: "user login successfully...",
+      exsistingUser: {
+        name: IsExistingUser.name,
+        username: IsExistingUser.email,
+        userRole:IsExistingUser.Role
+      },
+      token,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success: false,
+      message: "Error while login",
+      error,
+    });
+  }
+};
 
 //SignUp User
 const UserSignupController = async (req, res) => {
@@ -45,6 +97,7 @@ const UserSignupController = async (req, res) => {
     const NewUser = new userModel({
       name,
       email,
+      Role: userRoleEnums.isUser,
       password: HasehdPassword,
     });
     const user = await NewUser.save();

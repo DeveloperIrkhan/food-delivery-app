@@ -1,104 +1,88 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: Outfit;
+  box-sizing: border-box;
+}
 :root {
-    --font-family-roboto: "Roboto", sans-serif;
-    
-    --font-weight-light: 300;
-    --font-weight-medium: 500;
-    --font-weight-bold: 700;
-    
-    --font-style-normal: normal;
-    --font-style-italic: italic;
+  --first-color: #3c3c3c;
+  --second-color: #d3711a;
+  --hover-color: #fc7753;
+  --white-color: #ffff;
+}
+.bordered{
+  border:1px solid var(--hover-color)
+}
+body {
+  min-height: 100vh;
+  background: #fcfcfc;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+hr {
+  border: none;
+  height: 1px;
+  background-color: var(--hover-color);
+}
+.app-content {
+  display: flex;
 }
 
-.bold-font{
-    font-family: var(--font-family-roboto);
-    font-weight: var(--font-weight-medium);
+.div-container {
+  background-color: #f1eded;
+  border-radius: 1vmin;
+  padding: 2vmin;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
+.heading-text {
+  color: var(--hover-color);
+  border-bottom: 2px solid var(--hover-color);
+  letter-spacing: 1px;
+  font-weight: 500;
+  font-size: 5vmin;
+  padding: 3px 0;
+  margin: 7px;
+  cursor: none;
+}
+.btn-success {
+  background-color: var(--hover-color);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  border: transparent;
+}
+.btn-success:hover {
+  background-color: var(--first-color);
+}
+.upload-food-image {
+  margin: 10px 50px;
+  height: 150px;
+  width: 250px;
+}
+.uploadimg{
+  margin: 10px 10px;
 
-
-.cart-icon{
-    z-index: 9;
-    border-radius: 12px;
-    position: absolute;
-    background-color: white;
-    right: 19vmin;
-    top: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.dropdown-icon{
-    z-index: 9;
-    border-radius: 12px;
-    position: absolute;
-    background-color: white;
-    right: 12vmin;
-    top: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.loading-screen{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(198, 123, 16, 0.246); 
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.dropdown{
-    z-index: 9;
-    border-radius: 12px;
-    position: absolute;
-    background-color: white;
-    right: 5%;
-    padding: 1vmin;
-    top: 70px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+.img-thumbnails{
+  height: 30vmin;
 }
-.bottomBorder{
-    border: 2xp solid black;
-    color: aquamarine;
+.icon-delete{
+  transition: all .5s;
 }
-
-
-.work-sans {
-    font-family: 'Work Sans', sans-serif;
-}
-        
-#menu-toggle:checked + #menu {
-    display: block;
-}
-
-.hover\:grow {
-    transition: all 0.3s;
-    transform: scale(1);
-}
-
-.hover\:grow:hover {
-    transform: scale(1.02);
-}
-
-.carousel-open:checked + .carousel-item {
-    position: static;
-    opacity: 100;
-}
-
-.carousel-item {
-    -webkit-transition: opacity 0.6s ease-out;
-    transition: opacity 0.6s ease-out;
-}
-
-#carousel-1:checked ~ .control-1,
-#carousel-2:checked ~ .control-2,
-#carousel-3:checked ~ .control-3 {
-    display: block;
-}
-
-.carousel-indicators {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    bottom: 2%;
-    left: 0;
-    bottom: 19px;
-    right: 0;
-    text-align: center;
-    z-index: 10;
-}
-
-#carousel-1:checked ~ .control-1 ~ .carousel-indicators li:nth-child(1) .carousel-bullet,
-#carousel-2:checked ~ .control-2 ~ .carousel-indicators li:nth-child(2) .carousel-bullet,
-#carousel-3:checked ~ .control-3 ~ .carousel-indicators li:nth-child(3) .carousel-bullet {
-    color: #000;
-    /*Set to match the Tailwind colour you want the active one to be */
+.icon-delete:hover{
+  color: red;
 }

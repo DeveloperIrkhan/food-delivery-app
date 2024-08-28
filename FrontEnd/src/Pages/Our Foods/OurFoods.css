@@ -1,0 +1,29 @@
+.header-text {
+  color: #143642;
+  font-size: 5vmin;
+  letter-spacing: 4px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid var(--second-color);
+}
+.para-text {
+  color: #143642;
+  font-size: 3vmin;
+}
+.button {
+  background-color: transparent;
+  font-family: "Alex Brush", cursive;
+  border: 1px solid var(--second-color);
+  padding: 7px 16px;
+  font-size: 3vmin;
+  letter-spacing: 4px;
+  border-radius: 50px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  color: var(--second-color);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.button:hover {
+  background-color: var(--second-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
+}

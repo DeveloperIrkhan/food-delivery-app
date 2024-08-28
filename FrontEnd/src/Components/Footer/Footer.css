@@ -1,0 +1,22 @@
+.footer-section {
+    background-color: #e3d8d8;
+    padding: 10vmin 0;
+}
+.footer-section img{
+    height: 15vmin;
+}
+.logo-section {
+}
+.menu-section ul li {
+    list-style: none;
+    border-bottom: 2px solid transparent;
+    font-size: 18px;
+    transition: .5s;
+}
+.menu-section ul li:hover {
+    border-bottom: 2px solid #fc7753;
+}
+.social-section {
+}
+.copy-right-section {
+}

@@ -11,6 +11,14 @@ export const PasswordHashing = async (userPassword) => {
   }
 };
 
+export const ComparePasswordAsync = (password, existingPassword) => {
+  try {
+    return bcrypt.compare(password, existingPassword);
+  } catch (error) {
+    console.log("error while comparing password", error);
+  }
+};
+
 export const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET);
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "2h" });
 };
