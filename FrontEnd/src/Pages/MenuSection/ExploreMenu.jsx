@@ -13,7 +13,7 @@ const ExploreMenu = ({ category, setCategory }) => {
 
 
     return (
-        <div className="d-flex justify-content-center align-items-center flex-column mt-5">
+        <div id='explore-menu' className="d-flex justify-content-center align-items-center flex-column mt-5">
             <h3 className="header-text my-4">Explore Our Delicious Menu</h3>
             <div className="col-md-8 col-12 d-flex text-center flex-column m-auto">
                 <p className='paragraph-text'>Our Delicious Menu offers a variety of mouth-watering dishes crafted with the finest ingredients.

@@ -5,6 +5,7 @@
   margin: 0;
   font-family: Outfit;
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 :root {
   --first-color: #3c3c3c;

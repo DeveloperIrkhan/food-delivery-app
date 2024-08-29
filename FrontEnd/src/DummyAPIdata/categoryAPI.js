@@ -60,10 +60,10 @@ export const AllFoodsItems = [
   {
     _id: 1,
     name: "Shawarma",
-    description: "this is Shawarma with Cheez Flvour",
+    description: "Shawarma with Cheez",
     category: "Shawarma",
     image: assets.menu_shawarma_1,
-    price: 150,
+    price: 200,
   },
   {
     _id: 2,
@@ -71,7 +71,7 @@ export const AllFoodsItems = [
     description: "Shawarma with Cheez",
     category: "Shawarma",
     image: assets.menu_shawarma_2,
-    price: 150,
+    price: 250,
   },
   {
     _id: 3,
@@ -79,7 +79,7 @@ export const AllFoodsItems = [
     description: "Shawarma with Chatni",
     category: "Shawarma",
     image: assets.menu_shawarma_3,
-    price: 150,
+    price: 300,
   },
   {
     _id: 4,
@@ -87,7 +87,7 @@ export const AllFoodsItems = [
     description: "Lamon Salad",
     category: "Salad",
     image: assets.menu_salad_1,
-    price: 150,
+    price: 500,
   },
   {
     _id: 5,
@@ -95,7 +95,7 @@ export const AllFoodsItems = [
     description: "Mix Salad",
     category: "Salad",
     image: assets.menu_salad_2,
-    price: 150,
+    price: 200,
   },
   {
     _id: 6,
@@ -103,7 +103,7 @@ export const AllFoodsItems = [
     description: "Fruit Salad",
     category: "Salad",
     image: assets.menu_salad_3,
-    price: 150,
+    price: 800,
   },
   {
     _id: 7,
@@ -111,7 +111,7 @@ export const AllFoodsItems = [
     description: "Veg  Salad",
     category: "Salad",
     image: assets.menu_salad_4,
-    price: 150,
+    price: 600,
   },
   {
     _id: 8,
@@ -124,10 +124,10 @@ export const AllFoodsItems = [
   {
     _id: 9,
     name: "Salad",
-    description: "Salad",
+    description: "Mix Salad",
     category: "Salad",
     image: assets.menu_salad_6,
-    price: 150,
+    price: 300,
   },
   {
     _id: 10,
@@ -135,7 +135,7 @@ export const AllFoodsItems = [
     description: "Checken Rolls",
     category: "Rolls",
     image: assets.menu_Roles_1,
-    price: 150,
+    price: 400,
   },
   {
     _id: 11,
@@ -143,7 +143,7 @@ export const AllFoodsItems = [
     description: "Cheez Rolls",
     category: "Rolls",
     image: assets.menu_Roles_2,
-    price: 150,
+    price: 500,
   },
   {
     _id: 12,
@@ -151,7 +151,7 @@ export const AllFoodsItems = [
     description: "Parata Rolls",
     category: "Rolls",
     image: assets.menu_Roles_3,
-    price: 150,
+    price: 360,
   },
   {
     _id: 13,
@@ -159,7 +159,7 @@ export const AllFoodsItems = [
     description: "Samosa Rolls",
     category: "Rolls",
     image: assets.menu_Roles_4,
-    price: 150,
+    price: 800,
   },
   {
     _id: 14,
@@ -167,7 +167,7 @@ export const AllFoodsItems = [
     description: "Chicken Rolls with parata",
     category: "Rolls",
     image: assets.menu_Roles_5,
-    price: 150,
+    price: 600,
   },
   {
     _id: 15,
@@ -175,7 +175,7 @@ export const AllFoodsItems = [
     description: "Rolls With Salad",
     category: "Rolls",
     image: assets.menu_Roles_6,
-    price: 150,
+    price: 600,
   },
   {
     _id: 16,
@@ -183,7 +183,7 @@ export const AllFoodsItems = [
     description: "Cheez medium pizza",
     category: "Pizza",
     image: assets.menu_Pizza_1,
-    price: 150,
+    price: 700,
   },
   {
     _id: 17,
@@ -191,7 +191,7 @@ export const AllFoodsItems = [
     description: "Vegs Pizza",
     category: "Pizza",
     image: assets.menu_Pizza_2,
-    price: 150,
+    price: 1200,
   },
   {
     _id: 18,
@@ -199,7 +199,7 @@ export const AllFoodsItems = [
     description: "Pizza with Coke",
     category: "Pizza",
     image: assets.menu_Pizza_3,
-    price: 150,
+    price: 1800,
   },
   {
     _id: 19,
@@ -207,7 +207,7 @@ export const AllFoodsItems = [
     description: "Cheez & Veg Pizza",
     category: "Pizza",
     image: assets.menu_Pizza_4,
-    price: 150,
+    price: 1500,
   },
   {
     _id: 20,
@@ -215,7 +215,7 @@ export const AllFoodsItems = [
     description: "Large Pizza",
     category: "Pizza",
     image: assets.menu_Pizza_5,
-    price: 150,
+    price: 2000,
   },
   {
     _id: 21,
@@ -223,7 +223,7 @@ export const AllFoodsItems = [
     description: "Large Pasta",
     category: "Pasta",
     image: assets.menu_pasta_1,
-    price: 150,
+    price: 500,
   },
   {
     _id: 22,
@@ -231,7 +231,7 @@ export const AllFoodsItems = [
     description: "Vegs Pasta",
     category: "Pasta",
     image: assets.menu_pasta_2,
-    price: 150,
+    price: 600,
   },
   {
     _id: 23,
@@ -239,7 +239,7 @@ export const AllFoodsItems = [
     description: "Pasta",
     category: "Pasta",
     image: assets.menu_pasta_3,
-    price: 150,
+    price: 560,
   },
   {
     _id: 24,
@@ -247,7 +247,7 @@ export const AllFoodsItems = [
     description: "Small Tomatto Pasta",
     category: "Pasta",
     image: assets.menu_pasta_4,
-    price: 150,
+    price: 900,
   },
   {
     _id: 25,
@@ -255,7 +255,7 @@ export const AllFoodsItems = [
     description: "Tomatto Pasta",
     category: "Pasta",
     image: assets.menu_pasta_5,
-    price: 150,
+    price: 540,
   },
   {
     _id: 26,
@@ -263,7 +263,7 @@ export const AllFoodsItems = [
     description: "Mint Pasta",
     category: "Pasta",
     image: assets.menu_pasta_6,
-    price: 150,
+    price: 700,
   },
   {
     _id: 27,
@@ -271,7 +271,7 @@ export const AllFoodsItems = [
     description: "Chicken Pasta",
     category: "Pasta",
     image: assets.menu_pasta_7,
-    price: 150,
+    price: 300,
   },
   {
     _id: 28,
@@ -279,7 +279,7 @@ export const AllFoodsItems = [
     description: "Meat with Salad",
     category: "Meat",
     image: assets.menu_Meat_1,
-    price: 150,
+    price: 1500,
   },
   {
     _id: 29,
@@ -287,7 +287,7 @@ export const AllFoodsItems = [
     description: "Beef Meat",
     category: "Meat",
     image: assets.menu_Meat_2,
-    price: 150,
+    price: 800,
   },
   {
     _id: 30,
@@ -295,7 +295,7 @@ export const AllFoodsItems = [
     description: "Mutton Meat",
     category: "Meat",
     image: assets.menu_Meat_3,
-    price: 150,
+    price: 1200,
   },
   {
     _id: 31,
@@ -303,7 +303,7 @@ export const AllFoodsItems = [
     description: "Chicken Karahi",
     category: "Karahi",
     image: assets.menu_karahi_1,
-    price: 150,
+    price: 1800,
   },
   {
     _id: 32,
@@ -311,7 +311,7 @@ export const AllFoodsItems = [
     description: "Lahori Karahi",
     category: "Karahi",
     image: assets.menu_karahi_2,
-    price: 150,
+    price: 1500,
   },
   {
     _id: 33,
@@ -319,7 +319,7 @@ export const AllFoodsItems = [
     description: "Peshawari Karahi",
     category: "Karahi",
     image: assets.menu_karahi_3,
-    price: 150,
+    price: 2200,
   },
   {
     _id: 34,
@@ -327,7 +327,7 @@ export const AllFoodsItems = [
     description: "chocolate Cake",
     category: "Cake",
     image: assets.menu_cake_1,
-    price: 150,
+    price: 200,
   },
   {
     _id: 35,
@@ -335,7 +335,7 @@ export const AllFoodsItems = [
     description: "Cream Cake",
     category: "Cake",
     image: assets.menu_cake_2,
-    price: 150,
+    price: 300,
   },
   {
     _id: 36,
@@ -343,7 +343,7 @@ export const AllFoodsItems = [
     description: "Cake Slice",
     category: "Cake",
     image: assets.menu_cake_3,
-    price: 150,
+    price: 800,
   },
   {
     _id: 37,
@@ -351,7 +351,7 @@ export const AllFoodsItems = [
     description: "Cream Large Cake",
     category: "Cake",
     image: assets.menu_cake_4,
-    price: 150,
+    price: 700,
   },
   {
     _id: 38,
@@ -359,7 +359,7 @@ export const AllFoodsItems = [
     description: "Pin Cake",
     category: "Cake",
     image: assets.menu_cake_5,
-    price: 150,
+    price: 400,
   },
   {
     _id: 39,
@@ -367,7 +367,7 @@ export const AllFoodsItems = [
     description: "3 Layers Chocolate Cake",
     category: "Cake",
     image: assets.menu_cake_6,
-    price: 150,
+    price: 200,
   },
   {
     _id: 40,
@@ -375,7 +375,7 @@ export const AllFoodsItems = [
     description: "Beef Burger",
     category: "Burger",
     image: assets.menu_burger_1,
-    price: 150,
+    price: 800,
   },
   {
     _id: 41,
@@ -383,7 +383,7 @@ export const AllFoodsItems = [
     description: "Shami burger",
     category: "Burger",
     image: assets.menu_burger_2,
-    price: 150,
+    price: 500,
   },
   {
     _id: 42,
@@ -391,7 +391,7 @@ export const AllFoodsItems = [
     description: "Burger with Salad",
     category: "Burger",
     image: assets.menu_burger_3,
-    price: 150,
+    price: 800,
   },
   {
     _id: 43,
@@ -399,7 +399,7 @@ export const AllFoodsItems = [
     description: "Eggs & Shami Burger",
     category: "Burger",
     image: assets.menu_burger_4,
-    price: 150,
+    price: 200,
   },
 
 ];

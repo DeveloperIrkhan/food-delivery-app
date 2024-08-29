@@ -21,7 +21,7 @@ const ImageLoadingSpinner = ({ SorceFile, Alt }) => {
                 src={SorceFile}
                 alt={Alt}
                 className={`w-100 h-auto ${loading ? 'd-none' : 'd-block cart-image'}`}
-                onLoad={() => setLoading(false)} // Set loading to false when the image is fully loaded
+                onLoad={() => setLoading(false)} 
             />
         </div>
 

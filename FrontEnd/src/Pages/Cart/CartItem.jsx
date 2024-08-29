@@ -13,39 +13,34 @@ const CartItem = ({ cartitems }) => {
     }
     return (
         <section>
-            <div className="card border rounded-lg shadow-sm bg-white p-md-4 p-2 mb-2">
-                <div className="row align-items-center justify-content-between">
-                    <div className="col-md-auto order-md-1">
-                        <div className="cart-image">
-                            <ImageLoadingSpinner className="cart-image" src={cartitems.image} alt="cartItem Image" />
-                        </div>
+            <div className="card mb-3" style={{ maxWidth: 740 }}>
+                <div className="row g-0">
+                    <div className="col-md-6">
+                        <ImageLoadingSpinner className="img-fluid rounded-start shopingcart-img" SorceFile={cartitems.image} Alt="cartItem" />
                     </div>
-
-                    <label htmlFor="counter-input" className="visually-hidden">Choose quantity:</label>
-
-                    <div className="col-md-auto order-md-3 d-flex justify-content-end align-items-center">
-                        <div className="d-flex align-items-center">
-                            <button onClick={() => AddToCartitem(cartitems)}
-                                type="button"
-                                className="inc-button">
-                                +
-                            </button>
-                            <strong className="px-2">{cartitems.OrderQuantity}</strong>
-                            <button onClick={() => removefromCartitem(cartitems)}
-                                type="button"
-                                className="inc-button">
-                                -
-                            </button>
-                        </div>
-                    </div>
-
-                    <div className="col-md-4 text-end order-md-4">
-                        <p className="text-dark">Item Price: Rs/- {cartitems.price}</p>
-                    </div>
-
-                    <div className="col-md order-md-2">
-                        <div className="fw-medium text-dark">
-                            {cartitems.name}
+                    <div className="col-md-6" style={{position:"relative"}}>
+                        <div className="card-body">
+                            <div className="d-flex flex-md-column flex-row align-items-end">
+                            <h5 className="card-text mt-md-0 mt-3">{cartitems.name}</h5>
+                            <p className="card-text mx-md-0 mb-md-0 mx-3 mb-2">Item Price: Rs/- {cartitems.price}</p>
+                            </div>
+                            <div className="mt-auto align-self-end" style={{position:"absolute", bottom:"20px", right:"10px"}}>
+                                    <div className="mt-auto col-md-auto order-md-3 d-flex justify-content-end align-items-center">
+                                        <div className="d-flex align-items-center">
+                                            <button onClick={() => removefromCartitem(cartitems)}
+                                                type="button"
+                                                className="inc-button">
+                                                -
+                                            </button>
+                                            <strong className="px-2">{cartitems.OrderQuantity}</strong>
+                                            <button onClick={() => AddToCartitem(cartitems)}
+                                                type="button"
+                                                className="inc-button">
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
                     </div>
                 </div>

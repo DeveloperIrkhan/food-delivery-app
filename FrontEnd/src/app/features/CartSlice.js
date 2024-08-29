@@ -38,6 +38,7 @@ export const cartSlice = createSlice({
       if (findIndex >= 0) {
         state.cartItems[findIndex].OrderQuantity += 1;
         state.totalAmount += Number(action.payload.price);
+        state.totalItems = state.cartItems.length;
       }
     },
     DecrementItem: (state, action) => {
@@ -56,6 +57,7 @@ export const cartSlice = createSlice({
           state.totalAmount -= Number(action.payload.price);
         }
       }
+      state.totalItems = state.cartItems.length;
     },
   },
 });

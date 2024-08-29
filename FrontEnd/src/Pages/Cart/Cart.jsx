@@ -8,7 +8,7 @@ const Cart = () => {
   const TotalAmount = useSelector(state => state.cartSlice.totalAmount);
   return (
     <>
-      <section className="container bg-white py-5 antialiased" style={{marginTop:"10vmin"}}>
+      <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>
         <div className="container mx-auto px-4">
           <h2 className="h2 text-xl fw-semibold text-dark sm:text-2xl">Shopping Cart</h2>
           <div className="mt-6 row">
@@ -18,7 +18,6 @@ const Cart = () => {
                   cartList.map((cartItem) => (
                     <div key={cartItem._id}>
                       <CartItem totalItems={totalItems} cartitems={cartItem} />
-                      <ImageLoadingSpinner className="cart-image" src={cartitems.image} alt="cartItem Image" />
                     </div>
                   ))
                 }
@@ -29,7 +28,13 @@ const Cart = () => {
               <div className="card border rounded-lg shadow-sm">
                 <div className="card-body">
                   <p className="h4 fw-semibold text-dark">Order summary</p>
-                  <div className="mt-4">
+                  <div className="mt-4 border-top">
+                    {cartList.map((item) => (
+                      <dl className="d-flex justify-content-between pt-2">
+                        <dt className="">{item.name} x{item.OrderQuantity}</dt>
+                        <dd className="">{item.OrderQuantity*item.price}</dd>
+                      </dl>
+                    ))}
                     <dl className="d-flex justify-content-between border-top pt-2">
                       <dt className="h5 fw-bold">Total</dt>
                       <dd className="h5 fw-bold">{TotalAmount}</dd>

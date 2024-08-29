@@ -5,14 +5,14 @@ import { assets } from '../../assets/assets'
 const Footer = () => {
   const [menu, setMenu] = useState("")
   return (
-    <div className='d-flex flex-column justify-content-center align-items-center footer-section'>
+    <div id='contect-section' className='d-flex flex-column justify-content-center align-items-center footer-section'>
       <div className="logo-section my-md-4 my-2">
         <img src={assets.FullLogo} alt="" />
 
       </div>
       <div className="menu-section my-md-4 my-2">
         <ul className="d-flex my-auto flex-md-row flex-column gap-4 text-uppercase">
-          <li>Home</li>
+          <a href="#fooditems">Home</a>
           <li>Our Foods</li>
           <li>Contact us</li>
           <li>About us</li>
@@ -32,7 +32,7 @@ const Footer = () => {
       </div>
       <hr />
       <div className="copy-right-section">
-      Food Divalary Application &copy;  {new Date().getFullYear()}
+      Food Delivery System Copyright {new Date().getFullYear()} &copy;  All Rights Reserved
       </div>
     </div>
   )

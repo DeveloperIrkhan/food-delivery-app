@@ -1,0 +1,8 @@
+.about-us-img{
+    background-image: url("../../assets/about_us2.jpg");
+    height: 100vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed!important;
+}

@@ -9,6 +9,12 @@
 .full-logo {
   height: 90px;
   padding: 4px;
+  display: block;
+}
+.small-logo{
+  display: none;
+  height: 90px;
+  padding: 4px;
 }
 .profile-img {
   height: 30px;
@@ -42,13 +48,13 @@
 }
 .under-line {
   border-bottom: 2px solid var(--hover-color);
-  color: white;
+  color: var(--hover-color);
 
 }
 .active-link {
   background-color: var(--second-color);
   border-radius: 17px;
-  color: white;
+  color: var(--first-color);
 
 }
 .navbar-button {
@@ -65,4 +71,91 @@
   background-color: var(--second-color);
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   color: white;
+}
+.cart-container {
+  position: relative;
+}
+.cart-quantity{
+  position: absolute;
+  background: var(--second-color);
+  width: 2.5vmin;
+  color: white;
+  font-size: 1.5vmin;
+  height: 2.5vmin;
+  padding: .5vmin;
+  border-radius: 50%;
+  top: -5px;
+  right: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger-bar {
+  width: 25px;
+  height: 2px;
+  color: black;
+}
+
+.navbar-menu.open {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 10px 17px 29px 0px;
+  margin-left: 10%;
+}
+
+@media (max-width: 768px) {
+  .navbar-menu {
+    display: none;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem;
+  }
+  .full-logo {
+    height: 90px;
+    padding: 4px;
+    display: none;
+  }
+  .small-logo{
+    display: block;
+    height: 70px;
+    padding: 4px;
+  }
+  .hamburger-menu {
+    display: flex;
+    border: #3c3c3c 2px solid;
+    border-radius: 5px;
+  }
+.profile-img{
+  display: none;
+}
+  .cart-container, .dot {
+    display: none;
+  }
+  .user-cart{
+    height: 150px;
+  }
+  .bar{
+    width: 25px;
+    height: 3px;
+    background-color: var(--first-color);
+    margin: 5px;
+  }
 }
