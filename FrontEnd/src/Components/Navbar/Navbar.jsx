@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import * as Icon from 'react-bootstrap-icons'
 import './Navbar.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { assets } from '../../assets/assets';
 import { NavLink } from 'react-router-dom';
+import { showLoginModal } from '../../app/features/AuthSlice';
+import Signin from '../../Pages/Auth/Signin';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const Quantity = useSelector(state => state.cartSlice.totalItems);
-
+  const ShowLoginScreen = useSelector(state => state.authSlice.showLogin)
+  const dispatch = useDispatch()
   useEffect(() => {
     console.log("Quantity is ", Quantity);
   }, [Quantity]);
@@ -16,9 +19,14 @@ const Navbar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
+  const ShowModal = (item) => {
+    dispatch(showLoginModal(item))
+  }
   return (
     <>
+      <div className="position-relative">
+      {ShowLoginScreen ? <Signin /> : <></>}
+      </div>
       <div className="container-fluid position-relative">
         <div className="navbar fixed m-0 px-3 d-flex justify-content-between align-items-center">
           <div>
@@ -42,17 +50,14 @@ const Navbar = () => {
               )}
               <div className="cart-quantity">{Quantity}</div>
             </NavLink>
-            <div>
-              <img className="profile-img" src={assets.Profile} alt="Profile" />
-            </div>
           </div>
 
           <div className="dot">
-            <button className="navbar-button">Sign In</button>
+            <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>
           </div>
 
           {/* Hamburger Menu Button */}
-          <div className="hamburger-menu" onClick={toggleMenu}>
+          <div className="hamb urger-menu" onClick={toggleMenu}>
             {
               menuOpen ? <span><Icon.XLg /></span> :
                 <span>

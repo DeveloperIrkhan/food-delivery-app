@@ -95,18 +95,7 @@
   gap: 2rem;
 }
 
-.hamburger-menu {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  cursor: pointer;
-}
 
-.hamburger-bar {
-  width: 25px;
-  height: 2px;
-  color: black;
-}
 
 .navbar-menu.open {
   display: flex;
@@ -146,9 +135,22 @@
 .profile-img{
   display: none;
 }
-  .cart-container, .dot {
-    display: none;
-  }
+.navbar-button {
+  background-color: transparent;
+  border: 1px solid var(--second-color);
+  padding: 2px 7px;
+  font-size: var(--normal-fonts);
+  border-radius: 50px;
+  font-size: 4vmin;
+  color: var(--second-color);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.navbar-button:hover {
+  background-color: var(--second-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
+}
   .user-cart{
     height: 150px;
   }

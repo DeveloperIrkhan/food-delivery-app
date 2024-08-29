@@ -1,0 +1,43 @@
+.login-popup {
+  position: absolute;
+  z-index: 12;
+  left: 0;
+  right: 0;
+  top: 100px;
+  bottom: 1;
+  place-self: center;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 10px 17px 29px 0px;
+  background-color: #f8f4f4;
+  border: 1px solid #d0cccc;
+  animation: FadeIn 1s;
+}
+.cross-button {
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.cross-button {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+.auth-link {
+  cursor: pointer;
+  color: rgb(193, 72, 72);
+  font-weight: 500;
+  margin-left: 10px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid rgb(193, 72, 72);
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
