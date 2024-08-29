@@ -18,6 +18,7 @@ const Cart = () => {
                   cartList.map((cartItem) => (
                     <div key={cartItem._id}>
                       <CartItem totalItems={totalItems} cartitems={cartItem} />
+                      <ImageLoadingSpinner className="cart-image" src={cartitems.image} alt="cartItem Image" />
                     </div>
                   ))
                 }

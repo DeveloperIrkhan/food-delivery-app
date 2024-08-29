@@ -12,8 +12,8 @@
   --hover-color: #fc7753;
   --white-color: #ffff;
 }
-.bordered{
-  border:1px solid var(--hover-color)
+.bordered {
+  border: 1px solid var(--hover-color);
 }
 body {
   min-height: 100vh;
@@ -61,28 +61,28 @@ hr {
   height: 150px;
   width: 250px;
 }
-.uploadimg{
+.uploadimg {
   margin: 10px 10px;
-
 }
-.loading-screen{
-  position: absolute;
-  top: 0;
-  left: 0;
+.loading-screen {
   width: 100vw;
   height: 100vh;
-  background: rgba(198, 123, 16, 0.246); 
+  background: rgba(228, 227, 224, 0.853);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.img-thumbnails{
+.image-spinner{
+  width: 100px!important;
+
+}
+.img-thumbnails {
   height: 30vmin;
 }
-.icon-delete{
-  transition: all .5s;
+.icon-delete {
+  transition: all 0.5s;
 }
-.icon-delete:hover{
+.icon-delete:hover {
   color: red;
 }

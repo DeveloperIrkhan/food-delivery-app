@@ -1,10 +1,7 @@
 .cart-image {
-  width: 198px;
-  height: 119px;
-}
-.cart-images {
-  width: 198px;
-  height: 119px;
+  padding:5px;
+  border-radius: 10px;
+  height: 200px!important;
 }
 .inc-button {
   border-radius: 50%;

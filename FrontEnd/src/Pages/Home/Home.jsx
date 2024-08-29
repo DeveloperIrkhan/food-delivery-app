@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
 import OurFood from '../Our Foods/OurFood'
 import ExploreMenu from '../MenuSection/ExploreMenu'
-import FoodItem from '../../Components/FoodItems/FoodItem'
+import FoodItem from '../../Pages/FoodItems/FoodItem'
 import Banner from '../../Components/banner/Banner'
 
 
 const Home = () => {
-    const [category, setCategory] = useState("All")
+    const [category, setCategory] = useState("all")
     return (
         <div>
             <Banner />
