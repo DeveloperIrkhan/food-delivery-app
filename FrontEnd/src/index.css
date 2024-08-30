@@ -66,14 +66,18 @@ hr {
   margin: 10px 10px;
 }
 .loading-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
   background: rgba(228, 227, 224, 0.853);
-  z-index: 9999;
+  z-index: 999;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .image-spinner{
   width: 100px!important;
 

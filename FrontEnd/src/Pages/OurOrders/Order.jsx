@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 const Order = () => {
   const cartList = useSelector(state => state.cartSlice.cartItems);
-  const totalItems = useSelector(state => state.cartSlice.totalItems);
   const TotalAmount = useSelector(state => state.cartSlice.totalAmount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   return (
@@ -14,44 +13,44 @@ const Order = () => {
           <div className="row">
             <div className="col-md-6 col-12">
               <div className="my-2">
-                <label for="FirstName" class="col-form-label">FirstName</label>
-                <input type="text" class="form-control" id="FirstName" required placeholder='enter your First Name' />
+                <label for="FirstName" className="col-form-label">FirstName</label>
+                <input type="text" className="form-control" id="FirstName" required placeholder='enter your First Name' />
               </div>
             </div>
             <div className="col-md-6 col-12">
               <div className="my-2">
-                <label for="LastName" class="col-form-label">Last Name</label>
-                <input type="text" class="form-control" id="LastName" required placeholder='enter your Last Name' />
-              </div>
-            </div>
-          </div>
-          <div className="row">
-            <div className="col-md-6 col-12">
-              <div className="my-2">
-                <label for="email" class="col-form-label">Email</label>
-                <input type="text" class="form-control" id="email" required placeholder='enter your email' />
-              </div>
-
-            </div>
-            <div className="col-md-6 col-12">
-              <div className="my-2">
-                <label for="Phone" class="col-form-label">Phone</label>
-                <input type="text" class="form-control" id="Phone" required placeholder='enter your Phone' />
+                <label for="LastName" className="col-form-label">Last Name</label>
+                <input type="text" className="form-control" id="LastName" required placeholder='enter your Last Name' />
               </div>
             </div>
           </div>
           <div className="row">
             <div className="col-md-6 col-12">
               <div className="my-2">
-                <label for="Street" class="col-form-label">Street No</label>
-                <input type="text" class="form-control" id="Street" required placeholder='enter your Street No' />
+                <label for="email" className="col-form-label">Email</label>
+                <input type="text" className="form-control" id="email" required placeholder='enter your email' />
               </div>
 
             </div>
             <div className="col-md-6 col-12">
               <div className="my-2">
-                <label for="City" class="col-form-label">City</label>
-                <input type="text" class="form-control" id="City" required placeholder='enter your City' />
+                <label for="Phone" className="col-form-label">Phone</label>
+                <input type="text" className="form-control" id="Phone" required placeholder='enter your Phone' />
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-6 col-12">
+              <div className="my-2">
+                <label for="Street" className="col-form-label">Street No</label>
+                <input type="text" className="form-control" id="Street" required placeholder='enter your Street No' />
+              </div>
+
+            </div>
+            <div className="col-md-6 col-12">
+              <div className="my-2">
+                <label for="City" className="col-form-label">City</label>
+                <input type="text" className="form-control" id="City" required placeholder='enter your City' />
               </div>
             </div>
           </div>

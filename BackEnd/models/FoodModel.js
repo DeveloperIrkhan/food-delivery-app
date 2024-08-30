@@ -5,7 +5,7 @@ const foodSchema = new mongoose.Schema({
   description: { type: String, require: true },
   price: { type: Number, require: true },
   image: { type: String, require: true },
-  category: { type: String, require: true },
+  category: { type: mongoose.ObjectId, ref: "category", require: true },
 });
 // we want to create food model once, if it present in database it will be use
 // old one else create new one.

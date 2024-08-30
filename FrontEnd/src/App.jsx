@@ -5,7 +5,9 @@ import Cart from './Pages/Cart/Cart'
 import './Index.css'
 import Home from './Pages/Home/Home'
 import Order from './Pages/OurOrders/Order'
+import 'react-toastify/dist/ReactToastify.css';
 import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
+import Signin from './Pages/Auth/Signin'
 function App() {
   // const [showLogin, setShowLogin] = useState(false)
   const routes = createBrowserRouter(
@@ -22,9 +24,9 @@ function App() {
   return (
     <>
       <div>
+        <ToastContainer />
         <GoToTopButton />
         <RouterProvider router={routes} />
-        <ToastContainer />
       </div>
     </>
   )

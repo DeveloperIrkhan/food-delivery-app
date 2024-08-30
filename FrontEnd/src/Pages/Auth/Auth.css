@@ -1,6 +1,6 @@
 .login-popup {
   position: absolute;
-  z-index: 12;
+  z-index: 100;
   left: 0;
   right: 0;
   top: 100px;

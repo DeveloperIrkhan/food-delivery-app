@@ -1,4 +1,4 @@
-.img {
+ .img {
   height: 20vmin;
   width: 20vmin;
   border: 9px solid transparent;
@@ -25,7 +25,7 @@
     color: #143642;
     font-size: 3vmin;
 }
-/* Hover on text */
+
 .menu-item:hover .img{
   border-color: var(--hover-color);
 }
@@ -39,3 +39,55 @@
     color: var(--hover-color);
     border-bottom: 1px solid var(--hover-color);
 }
+
+ 
+
+/* 
+ .img {
+  width: 40vmin;
+  height: 18vmin;
+  border: 9px solid transparent;
+  border-radius: 50%;
+  transition: border-color 0.4s ease;
+}
+
+.menu_name {
+  color: #143642;
+  transition: 0.4s ease;
+  font-size: 2.4vmin;
+  overflow: auto;
+}
+
+.img-active {
+  transition: all 0.5s;
+  border-color: var(--hover-color);
+  padding: 2px;
+}
+.img:hover {
+  border-color: var(--hover-color);
+}
+.paragraph-text {
+  color: #143642;
+  font-size: 3vmin;
+}
+.menu-item:hover .img {
+  border-color: var(--hover-color);
+}
+.menu-item:hover .menu_name {
+  border-bottom: 1px solid var(--hover-color);
+  overflow: auto;
+}
+.text-active {
+  font-size: 2.5vmin;
+  transition: all 0.5s;
+  color: var(--hover-color);
+  border-bottom: 1px solid var(--hover-color);
+}
+
+@media (max-width: 768px) {
+    .img {
+      width: 30vmin;
+  border: 5px solid transparent;
+  height: 18vmin;
+  }
+} */

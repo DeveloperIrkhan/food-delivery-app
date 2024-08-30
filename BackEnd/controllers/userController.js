@@ -19,7 +19,7 @@ const UserSignInController = async (req, res) => {
     // checking user exsisting
     const IsExistingUser = await userModel.findOne({ email: username });
     if (!IsExistingUser) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: false,
         message: `this user ${username} is not registered yet`,
       });
@@ -30,7 +30,7 @@ const UserSignInController = async (req, res) => {
       IsExistingUser.password
     );
     if (!IsPasswordMatched) {
-      return res.status(404).send({
+      return res.status(200).send({
         success: false,
         message: "password doesn't matched....",
       });

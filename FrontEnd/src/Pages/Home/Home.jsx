@@ -18,7 +18,6 @@ const Home = () => {
             <FoodItem category={category} />
             <MobileStore/>
             <AboutUs/>
-            <Footer/>
         </div>
     )
 }

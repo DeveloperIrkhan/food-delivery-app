@@ -3,66 +3,31 @@ import foodModel from "../models/FoodModel.js";
 import fs from "fs";
 // to add food model
 
-const AddFood = async (req, resp) => {
-  let imageName = `${req.file.filename}`;
-  const food = new foodModel({
-    name: req.body.name,
-    description: req.body.description,
-    price: req.body.price,
-    image: imageName,
-    category: req.body.category,
-  });
+// const AddFood = async (req, resp) => {
+//   let imageName = `${req.file.filename}`;
+//   const food = new foodModel({
+//     name: req.body.name,
+//     description: req.body.description,
+//     price: req.body.price,
+//     image: imageName,
+//     category: req.body.category,
+//   });
 
-  try {
-    await food.save();
-    resp.json({
-      success: true,
-      message: "Food added",
-    });
-  } catch (error) {
-    console.log(error);
-    resp.status(500).send({
-      success: false,
-      message: "error while creating new food item",
-    });
-  }
-};
-
-// const AddingFoodController = async (req, resp) => {
 //   try {
-//     const { name, description, price, category } = req.body;
-//     let imageName = `${req.file.filename}`;
-//     switch (true) {
-//       case !name: {
-//         return resp.status(500).send({ error: "name is required" });
-//       }
-//       case !description: {
-//         return resp.status(500).send({ error: "description is required" });
-//       }
-//       case !price: {
-//         return resp.status(500).send({ error: "price is required" });
-//       }
-//       case !category: {
-//         return resp.status(500).send({ error: "category is required" });
-//       }
-//       case !imageName: {
-//         return resp.status(500).send({ error: "please upload image" });
-//       }
-//     }
-//     const createNewFood = new foodModel({
-//       ...req.fields,
-//       image: imageName,
+//     await food.save();
+//     resp.json({
+//       success: true,
+//       message: "Food added",
 //     });
-
-//     await createNewFood.save();
 //   } catch (error) {
 //     console.log(error);
 //     resp.status(500).send({
 //       success: false,
-//       message: "error while creating new product",
+//       message: "error while creating new food item",
 //     });
 //   }
 // };
+
 const AddingFoodController = async (req, resp) => {
   try {
     const { name, description, price, category } = req.body;
@@ -111,7 +76,7 @@ const AddingFoodController = async (req, resp) => {
 const ListAllFoodController = async (req, resp) => {
   try {
     const foods = await foodModel.find({});
-    resp.status(200).send({
+    return resp.status(200).send({
       success: true,
       message: "food items fetched successfully",
       totalFoodItems: foods.length,
@@ -119,7 +84,7 @@ const ListAllFoodController = async (req, resp) => {
     });
   } catch (error) {
     console.log(error);
-    resp.status(200).send({
+    return resp.status(200).send({
       success: false,
       message: "error while food items is fetching",
     });
