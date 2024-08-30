@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './cart.css'
+import { useNavigate } from 'react-router-dom'
 import CartItem from './CartItem'
 import { useSelector } from 'react-redux';
 const Cart = () => {
   const cartList = useSelector(state => state.cartSlice.cartItems);
   const totalItems = useSelector(state => state.cartSlice.totalItems);
   const TotalAmount = useSelector(state => state.cartSlice.totalAmount);
+  const deliveryFee = TotalAmount > 0 ? 150 : 0;
+  const navigate = useNavigate()
   return (
     <>
       <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>
@@ -32,16 +35,28 @@ const Cart = () => {
                     {cartList.map((item) => (
                       <dl className="d-flex justify-content-between pt-2">
                         <dt className="">{item.name} x{item.OrderQuantity}</dt>
-                        <dd className="">{item.OrderQuantity*item.price}</dd>
+                        <dd className="">Rs/- {item.OrderQuantity * item.price} </dd>
                       </dl>
                     ))}
+                    {deliveryFee != 0 ?
+                      <>
+                        <dl className="d-flex justify-content-between pt-3 border-top">
+                          <dt className="">Delivery Fee</dt>
+                          <dd className="">Rs/- {deliveryFee}</dd>
+                        </dl>
+
+                      </> : <></>}
                     <dl className="d-flex justify-content-between border-top pt-2">
                       <dt className="h5 fw-bold">Total</dt>
-                      <dd className="h5 fw-bold">{TotalAmount}</dd>
+                      <dd className="h5 fw-bold">Rs/- {TotalAmount + deliveryFee}</dd>
                     </dl>
                   </div>
                   <div className="d-flex justify-content-center mt-3">
-                    <span className="text-muted">Continue Shopping</span>
+                    <button onClick={() => navigate('/user-orders')} className="button-primary">Proceed To Checkout</button>
+                  </div>
+                  <div className="d-flex justify-content-center mt-3 top-border">
+                    <input className='form-control' placeholder='Promo Code here' />
+                    <button  className='btn btn-dark'>Submit</button>
                   </div>
                 </div>
               </div>

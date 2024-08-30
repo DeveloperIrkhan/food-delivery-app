@@ -5,6 +5,7 @@ import FoodItem from '../../Pages/FoodItems/FoodItem'
 import Banner from '../../Components/banner/Banner'
 import MobileStore from '../../Components/Mobile/MobileStore'
 import AboutUs from '../../Components/About us/AboutUs'
+import Footer from '../../Components/Footer/Footer'
 
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
             <FoodItem category={category} />
             <MobileStore/>
             <AboutUs/>
+            <Footer/>
         </div>
     )
 }
