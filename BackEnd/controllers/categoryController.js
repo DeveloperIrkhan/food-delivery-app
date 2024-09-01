@@ -20,6 +20,13 @@ const AddCategoryController = async (req, resp) => {
         .status(500)
         .send({ success: false, message: "please enter description" });
     }
+    const existingCategory = await categoryModel.findOne({ name });
+    if (existingCategory) {
+      return resp.status(200).send({
+        success: false,
+        message: `${name} category is already existed`,
+      });
+    }
 
     const createNewCategory = new categoryModel({
       name,

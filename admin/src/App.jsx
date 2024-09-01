@@ -8,11 +8,13 @@ import Signin from './Pages/Auth/Signup'
 import Orders from './Pages/Orders/Orders'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify'
+import AddCategory from './Pages/AddCategory/AddCategory'
 const App = () => {
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path='/' element={<Layout />}>
+          <Route path='add-category' element={<AddCategory />} />
           <Route path='add-food' element={<AddFood />} />
           <Route path='list-food' element={<ListFoods />} />
           <Route path='list-order' element={<Orders />} />
@@ -23,8 +25,8 @@ const App = () => {
   )
   return (
     <div>
-      <RouterProvider router={routes} />
       <ToastContainer />
+      <RouterProvider router={routes} />
     </div>
   )
 }

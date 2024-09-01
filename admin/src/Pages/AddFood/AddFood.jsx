@@ -1,30 +1,35 @@
-import React, { useState } from 'react'
+import { useEffect, useState } from "react";
+import Spinner from "../../Components/Spinner/Spinner";
 import HeadingTitle from '../../Components/HeadingTitle'
+import { toast } from 'react-toastify'
 import { assets } from '../../assets/assets'
-import { useInsertNewFoodMutation } from '../../app/Features/apiSlice'
-import Spinner from '../../Components/Spinner/Spinner'
+import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { getAllCategories } from '../../app/Features/CategortySlice'
 const AddFood = () => {
+  const [loading, setLoading] = useState(false)
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
   const [price, setPrice] = useState("");
   const [image, setImage] = useState(false);
-  const [loading, setLoading] = useState(false);
-  // const [formData, setFormData] = useState({
-  //   name: "",
-  //   description: "",
-  //   category: "salad",
-  //   price: ""
-  // })
-
-  const [InsertNewFood] = useInsertNewFoodMutation();
-
-  // const onChangeHandler = (event) => {
-  //   const name = event.target.name;
-  //   const value = event.target.value;
-  //   setFormData((data) => ({ ...data, [name]: value }))
-  // }
-
+  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState([]);
+  const categoriesList = useSelector(state => state.CategorySlice.getAllCategories);
+  const fetchCategories = async () => {
+    try {
+      setLoading(true)
+      const categoriesResp = await axios.get("http://localhost:4000/api/category/get-all-categories")
+      if (categoriesResp.data.success) {
+        setLoading(false)
+        setCategories(categoriesResp.data.categories)
+      }
+    } catch (error) {
+      toast.error(categoriesResp.data.message)
+    }
+  }
+  useEffect(() => {
+    fetchCategories();
+  }, []);
   const submitForm = async (e) => {
     e.preventDefault();
     try {
@@ -32,20 +37,26 @@ const AddFood = () => {
       const data = new FormData();
       data.append("name", name)
       data.append("description", description)
-      data.append("category", category)
       data.append("price", Number(price))
       data.append("image", image)
-      await InsertNewFood(data)
-      setName("")
-      setCategory("salad")
-      setDescription("")
-      setPrice("")
+      data.append("category", category)
+      const response = await axios.post("http://localhost:4000/api/food/add", data)
+      if (response.data.success) {
+        toast.success(response.data.message)
+      }
+      else {
+        toast.error(response.data.message)
+      }
       setImage(false)
       setLoading(false)
+      setName("")
+      setDescription("")
+      setPrice("")
     } catch (error) {
-      console.log("Got error while inserting new Food", error)
+      setLoading(false)
+      toast.error(error.message)
+      console.log("Got error while inserting new Food", error.message)
     }
-
   }
   if (loading) {
     return (<div>
@@ -60,11 +71,11 @@ const AddFood = () => {
       <div className="add">
         <form action="" className="col-flex" onSubmit={submitForm}>
           <div className="form-group">
-            <div className="add-img-upload flex-col">
+            <div className="add-img-upload flex-col mt-3">
               <label className='form-label'>Upload Image</label>
               <label htmlFor="image">
                 <img className={`${image ? "upload-food-image" : "uploadimg"}`}
-                src={image ? URL.createObjectURL(image) : assets.UploadImage}
+                  src={image ? URL.createObjectURL(image) : assets.UploadImage}
                   alt="" />
               </label>
               <input onChange={(e) => setImage(e.target.files[0])}
@@ -73,8 +84,8 @@ const AddFood = () => {
                 id="image"
                 hidden required />
             </div>
-            <div className="add-product-name flex-col">
-              <label className='form-label'>product name</label>
+            <div className="add-product-name flex-col mt-3">
+              <label className='form-label'>Food Name</label>
               <input onChange={(e) => { setName(e.target.value) }}
                 value={name}
                 className='form-control'
@@ -82,8 +93,8 @@ const AddFood = () => {
                 name='name'
                 placeholder='type here' />
             </div>
-            <div className="add-product-description flex-col">
-              <p>product description</p>
+            <div className="add-product-description flex-col mt-3">
+              <label className="form-label">Description</label>
               <textarea onChange={(e) => { setDescription(e.target.value) }}
                 value={description}
                 className='form-control'
@@ -92,24 +103,24 @@ const AddFood = () => {
                 placeholder='write conent here' />
             </div>
             <div className="add-category-price">
-              <div className="add-category flex-col">
+              <div className="add-category flex-col mt-3">
                 <label className='form-label'>Product category</label>
-                <select onChange={(e) => { setCategory(e.target.value) }}
+                <select
+                  placeholder="Select a cetegory"
+                  onChange={(e) => { setCategory(e.target.value) }}
                   className='form-control'
-                  name={category}
                   id="">
-                  <option value="salad">salad</option>
-                  <option value="Rolls">Rolls</option>
-                  <option value="Deserts">Deserts</option>
-                  <option value="Sandwich">Sandwich</option>
-                  <option value="Cakes">Cakes</option>
-                  <option value="Pure Veg">Pure Veg</option>
-                  <option value="Pasta">Pasta</option>
-                  <option value="Noodles">Noodles</option>
+                  {categories.map((item) => {
+                    return (
+                      <option key={item._id} value={item._id}>
+                        {item.name}
+                      </option>
+                    )
+                  })}
                 </select>
               </div>
             </div>
-            <div className="add-price flex-col">
+            <div className="add-price flex-col mt-3">
               <label
                 className='form-label'>Product Price</label>
               <input className='form-control'

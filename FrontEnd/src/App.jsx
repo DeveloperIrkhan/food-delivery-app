@@ -7,9 +7,12 @@ import Home from './Pages/Home/Home'
 import Order from './Pages/OurOrders/Order'
 import 'react-toastify/dist/ReactToastify.css';
 import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
-import Signin from './Pages/Auth/Signin'
+import { SetToken } from './app/features/AuthSlice'
+import { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 function App() {
   // const [showLogin, setShowLogin] = useState(false)
+  const dispatch = useDispatch();
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -21,6 +24,13 @@ function App() {
       </>
     )
   )
+  useEffect(() => {
+    const GetUserToken = () => {
+      if (localStorage.getItem("userToken"))
+        dispatch(SetToken(localStorage.getItem("userToken")));
+    };
+    GetUserToken();
+  }, []);
   return (
     <>
       <div>

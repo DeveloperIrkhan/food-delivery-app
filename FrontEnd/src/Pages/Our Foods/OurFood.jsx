@@ -3,7 +3,7 @@ import './OurFoods.css'
 const OurFood = () => {
   return (
     <div id='our-foods' className='d-flex justify-content-center align-items-center flex-column mt-5'>
-      <h3 className='header-text text-center'>Order Your favourite food here</h3>
+      <h3 className='header-text text-center'>Today's Specials</h3>
       <div className=" col-md-8 col-12">
         <div className="text-center">
           <p className='para-text'>Choose from a diverse menu featuring a detectable array of dishes
@@ -12,7 +12,7 @@ const OurFood = () => {
             and elevate your dining experience.
             one delicious meal at the time
           </p>
-          <button className='button'>View Menu</button>
+          <button className='button'>Book a Table</button>
         </div>
       </div>
     </div>

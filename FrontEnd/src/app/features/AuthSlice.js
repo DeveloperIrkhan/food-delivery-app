@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   showLogin: false,
+  user: [],
+  Token: "",
 };
 
 export const authSlice = createSlice({
@@ -13,8 +15,15 @@ export const authSlice = createSlice({
     hideLoginModal: (state, action) => {
       state.showLogin = action.payload;
     },
+    SetToken: (state, action) => {
+      state.Token = action.payload;
+    },
+    LoggedInUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { showLoginModal, hideLoginModal } = authSlice.actions;
+export const { showLoginModal, hideLoginModal, SetToken, LoggedInUser } =
+  authSlice.actions;
 export default authSlice.reducer;

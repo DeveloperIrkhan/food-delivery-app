@@ -17,9 +17,14 @@ const FoodList = () => {
 const Sidebar = () => {
     return (
         <div className="sidebar">
+            <NavLink to={"add-category"}
+                className={({ isActive }) =>
+                    `${isActive ? "activebtn" : ""}`}>
+                <SidebarButtons onclickFun={AddFood} text={"Add Category"} img={assets.FoodAddicon} alt={""} />
+            </NavLink>
             <NavLink to={"add-food"}
-                className={({ isActive }) => 
-                `${isActive ? "activebtn" : ""}`}>
+                className={({ isActive }) =>
+                    `${isActive ? "activebtn" : ""}`}>
                 <SidebarButtons onclickFun={AddFood} text={"Add Food"} img={assets.FoodAddicon} alt={""} />
             </NavLink>
             <NavLink to={'list-order'} className={

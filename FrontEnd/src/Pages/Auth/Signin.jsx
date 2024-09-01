@@ -3,15 +3,16 @@ import './Auth.css'
 import axios from 'axios'
 import * as Icon from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { hideLoginModal } from '../../app/features/AuthSlice'
+import { hideLoginModal, LoggedInUser, SetToken } from '../../app/features/AuthSlice'
 import Spinner from '../../Components/Spinner/Spinner'
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 const Signin = () => {
   const [currentState, setCurrentState] = useState("Signup")
   const dispatch = useDispatch();
   const hideModal = (boolValue) => {
     dispatch(hideLoginModal(boolValue))
   }
+
   const isModelOpen = useSelector(state => state.authSlice.showLogin)
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
@@ -23,24 +24,32 @@ const Signin = () => {
     e.preventDefault();
     if (currentState === "Login") {
       const _userData = {
-        username: email,
+        email: email,
         password: password
       }
       const newUrl = _api_url + "/Signin"
       const response = await axios.post(newUrl, _userData)
       console.log("info", response.data)
       if (response.data.success) {
+        dispatch(SetToken(response.data.token));
+        const existingUser = {
+          userRole: response.data.exsistingUser.userRole,
+          name: response.data.exsistingUser.name,
+          email: response.data.exsistingUser.email
+        }
+        dispatch(LoggedInUser(existingUser));
         setLoading(false);
+        localStorage.setItem("userToken", response.data.token)
         console.log(response);
         setEmail("");
         setPassword("");
         toast.success(response.data.message);
         hideModal(false)
+
       }
       else {
         toast.error(response.data.message)
         setLoading(false);
-
       }
 
     }
@@ -53,16 +62,25 @@ const Signin = () => {
       const newUrl = _api_url + "/Signup"
       const response = await axios.post(newUrl, _userData)
       if (response.data.success) {
-        setLoading(false);
+        const newUser = {
+          name: response.data.user.name,
+          email: response.data.user.email,
+          userRole: response.data.user.Role,
+        }
+        localStorage.setItem("userToken", response.data.token)
+        dispatch(LoggedInUser(newUser));
+        dispatch(SetToken(response.data.token));
         setUsername("");
         setEmail("")
         setPassword("");
+        setLoading(false);
         console.log(response);
         toast.success(response.data.message)
         hideModal(false)
       }
       else {
         toast.error(response.data.message)
+        setLoading(false);
       }
     }
   }

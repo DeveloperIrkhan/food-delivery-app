@@ -10,18 +10,18 @@ import { userRoleEnums } from "../Enums/userRolesEnums.js";
 //Login User
 const UserSignInController = async (req, res) => {
   try {
-    const { username, password } = req.body;
-    if (!username || !password) {
+    const { email, password } = req.body;
+    if (!email || !password) {
       return res
         .status(404)
-        .send({ message: "pelase enter username and password" });
+        .send({ message: "pelase enter email and password" });
     }
     // checking user exsisting
-    const IsExistingUser = await userModel.findOne({ email: username });
+    const IsExistingUser = await userModel.findOne({ email: email });
     if (!IsExistingUser) {
       return res.status(200).send({
         success: false,
-        message: `this user ${username} is not registered yet`,
+        message: `this user ${email} is not registered yet`,
       });
     }
     // checking password comparing
@@ -42,8 +42,8 @@ const UserSignInController = async (req, res) => {
       message: "user login successfully...",
       exsistingUser: {
         name: IsExistingUser.name,
-        username: IsExistingUser.email,
-        userRole:IsExistingUser.Role
+        email: IsExistingUser.email,
+        userRole: IsExistingUser.Role,
       },
       token,
     });

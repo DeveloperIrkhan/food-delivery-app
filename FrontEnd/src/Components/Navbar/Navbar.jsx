@@ -3,19 +3,21 @@ import * as Icon from 'react-bootstrap-icons'
 import './Navbar.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { assets } from '../../assets/assets';
-import { NavLink } from 'react-router-dom';
-import { showLoginModal } from '../../app/features/AuthSlice';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { SetToken, showLoginModal } from '../../app/features/AuthSlice';
 import Signin from '../../Pages/Auth/Signin';
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const Quantity = useSelector(state => state.cartSlice.totalItems);
   const ShowLoginScreen = useSelector(state => state.authSlice.showLogin)
+  const token = useSelector(state => state.authSlice.Token)
   const dispatch = useDispatch()
-  useEffect(() => {
-    console.log("Quantity is ", Quantity);
-  }, [Quantity]);
-
+  const navigate = useNavigate()
+  const logout = () => {
+    localStorage.removeItem("userToken")
+    dispatch(SetToken(""))
+  }
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
@@ -25,7 +27,7 @@ const Navbar = () => {
   return (
     <>
       <div className="position-relative">
-      {ShowLoginScreen ? <Signin /> : <></>}
+        {ShowLoginScreen ? <Signin /> : <></>}
       </div>
       <div className="container-fluid position-relative">
         <div className="navbar fixed m-0 px-3 d-flex justify-content-between align-items-center">
@@ -36,9 +38,9 @@ const Navbar = () => {
 
           <div className={`navbar-menu ${menuOpen ? 'open' : ''}`}>
             <NavLink to="home" className={({ isActive }) => `p-1 ${isActive ? "under-line" : ""}`}>Home</NavLink>
-            <a href="#explore-menu" className={({ isActive }) => `p-1 ${isActive ? "under-line" : ""}`}>Our Foods</a>
-            <a href="#contect-section" className={({ isActive }) => `p-1 ${isActive ? "under-line" : ""}`}>Contact Us</a>
-            <a href="#about-us" className={({ isActive }) => `p-1 ${isActive ? "under-line" : ""}`}>About Us</a>
+            <a href="#explore-menu" className="under-">Our Foods</a>
+            <a href="#contect-section" className="under-">Contact Us</a>
+            <a href="#about-us" className="under-">About Us</a>
           </div>
 
           <div className="cart-container d-flex align-items-center gap-3">
@@ -50,11 +52,27 @@ const Navbar = () => {
               )}
               <div className="cart-quantity">{Quantity}</div>
             </NavLink>
+            <div className="dot">
+              {
+                !token ?
+                  <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>
+                  : <div>
+                    <span className='user-container'>
+                      <img className='img-user' src={assets.Profile} alt="" />
+                      <div className="dropdownmenu">
+                        <ul>
+                          <li onClick={() => navigate('/user-orders')} >Orders</li>
+                          <hr className='m-1' />
+                          <li onClick={() => logout()}>Logout</li>
+                        </ul>
+                      </div>
+                    </span>
+                  </div>
+              }
+            </div>
           </div>
 
-          <div className="dot">
-            <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>
-          </div>
+
 
           {/* Hamburger Menu Button */}
           <div className="hamb urger-menu" onClick={toggleMenu}>

@@ -39,12 +39,12 @@ const AddingFoodController = async (req, resp) => {
     const imageName = req.file.filename;
 
     // Validate required fields
-    if (!name) return resp.status(400).send({ error: "Name is required" });
+    if (!name) return resp.status(500).send({ error: "Name is required" });
     if (!description)
-      return resp.status(400).send({ error: "Description is required" });
-    if (!price) return resp.status(400).send({ error: "Price is required" });
+      return resp.status(500).send({ error: "Description is required" });
+    if (!price) return resp.status(500).send({ error: "Price is required" });
     if (!category)
-      return resp.status(400).send({ error: "Category is required" });
+      return resp.status(500).send({ error: "Category is required" });
 
     // Create a new food item
     const createNewFood = new foodModel({
