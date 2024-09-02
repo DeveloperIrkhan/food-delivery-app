@@ -40,12 +40,12 @@ const ExploreMenu = ({ category, setCategory }) => {
                     {
                         categoriesList.map((item, index) => (
                             <div
-                                onClick={() => setCategory(prev => prev === item.name ? "all" : item.name)}
+                                onClick={() => setCategory(prev => prev === item._id ? "all" : item._id)}
                                 className="menu-item col-md-2 col-4 d-flex flex-column align-items-center mb-4"
                                 key={index}>
-                                <img className={`img img-fluid ${category === item.name ? "img-active" : ""}`}
+                                <img className={`img img-fluid ${category === item._id ? "img-active" : ""}`}
                                     src={`http://localhost:4000/images/${item.image}`} alt={"img"} />
-                                <p className={`menu_name mt-2 ${category === item.name ? "text-active" : ""}`}>{item.name}</p>
+                                <p className={`menu_name mt-2 ${category === item._id ? "text-active" : ""}`}>{item.name}</p>
                             </div>
                         ))
                     }

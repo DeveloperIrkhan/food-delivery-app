@@ -11,15 +11,9 @@ export const categoryReducer = createSlice({
   reducers: {
     RetriveCategories: (state, action) => {
       state.foodCategory = action.payload;
-      // action.payload.forEach(element => {
-      //     state.foodCategory.push(element)
-      // });
     },
     RetriveAllFoodItems: (state, action) => {
       state.AllFoodItems = action.payload;
-      // action.payload.forEach(element => {
-      //     state.foodCategory.push(element)
-      // });
     },
   },
 });

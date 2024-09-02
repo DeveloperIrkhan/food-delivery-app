@@ -10,8 +10,7 @@ const FoodCard = ({ item }) => {
     // Get cart items from the Redux store
     const cartItems = useSelector((state) => state.cartSlice.cartItems) || [];
     // Assuming item has a unique `id`
-    const existingItem = cartItems.some(cartItem => cartItem._id === item._id); // Assuming item has a unique `id`
-
+    const existingItem = cartItems.some(cartItem => cartItem._id === item._id);
     const TotalCount = useSelector(state => state.cartSlice.totalItems)
     useEffect(() => {
         setItemCount(TotalCount)
@@ -27,7 +26,9 @@ const FoodCard = ({ item }) => {
         <div className="col-md-3 col-12 gap-3 mb-3 food-item">
             <div className="card shadow-sm rounded">
                 <div className="food-item-img-container overflow-hidden">
-                    <ImageLoadingSpinner className="card-img-top" SorceFile={item.image} Alt="cartItem" />
+                    <ImageLoadingSpinner 
+                    className="card-img-top" 
+                    SorceFile={`http://localhost:4000/images/${item.image}`} Alt="cartItem" />
                 </div>
                 <div className="card-body food-item-info">
                     <div className="food-item-rating">

@@ -30,8 +30,7 @@ const AddFood = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-  const submitForm = async (e) => {
-    e.preventDefault();
+  const submitForm = async () => {
     try {
       setLoading(true)
       const data = new FormData();

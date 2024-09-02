@@ -44,7 +44,7 @@ const Navbar = () => {
           </div>
 
           <div className="cart-container d-flex align-items-center gap-3">
-            <NavLink to="user-cart" className="bg-none">
+            <NavLink to="user-cart" className="bg-none carts-container">
               {Quantity > 0 ? (
                 <img className="cart-img" src={assets.Fullcarticon} alt="Cart" />
               ) : (

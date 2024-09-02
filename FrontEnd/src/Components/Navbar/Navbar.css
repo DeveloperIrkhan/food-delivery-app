@@ -72,6 +72,10 @@
 }
 .cart-container {
   position: relative;
+
+}
+.carts-container {
+  position: relative;
 }
 .cart-quantity {
   position: absolute;
@@ -83,7 +87,7 @@
   padding: 0.5vmin;
   border-radius: 50%;
   top: -5px;
-  right: 40px;
+  right: -20px;
   display: flex;
   align-items: center;
   justify-content: center;
