@@ -6,18 +6,18 @@ const AddCategoryController = async (req, resp) => {
     const { name, description } = req.body;
     if (!req.file || !req.file.filename) {
       return resp
-        .status(500)
+        .status(501)
         .send({ success: false, message: "please upload image" });
     }
     const ImageFile = req.file.filename;
     if (!name) {
       return resp
-        .status(500)
+        .status(501)
         .send({ success: false, message: "please enter name" });
     }
     if (!description) {
       return resp
-        .status(500)
+        .status(501)
         .send({ success: false, message: "please enter description" });
     }
     const existingCategory = await categoryModel.findOne({ name });
