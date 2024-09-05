@@ -117,6 +117,7 @@
   width: 35px;
   cursor: pointer;
   z-index: 2;
+  border-radius: 50%;
 }
 
 .dropdownmenu {

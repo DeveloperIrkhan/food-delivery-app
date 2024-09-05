@@ -12,10 +12,27 @@ const Navbar = () => {
   const Quantity = useSelector(state => state.cartSlice.totalItems);
   const ShowLoginScreen = useSelector(state => state.authSlice.showLogin)
   const token = useSelector(state => state.authSlice.Token)
+  const userModel = useSelector(state => state.authSlice.user)
+  const [image, setImage] = useState(null);
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  useEffect(() => {
+    console.log("savedUser", userModel);
+    const userCreds = userModel
+    console.log("savedUser", userCreds);
+    if (userCreds && userCreds?.image && userCreds?.image?.data) {
+      const byteArray = new Uint8Array(userCreds?.image?.data);
+      const base64String = btoa(
+        byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
+      );
+      setImage(`data:image/jpeg;base64,${base64String}`);
+    } else {
+      console.log("No image found for user");
+    }
+  }, [userModel])
   const logout = () => {
     localStorage.removeItem("userToken")
+    localStorage.removeItem("user")
     dispatch(SetToken(""))
   }
   const toggleMenu = () => {
@@ -58,7 +75,7 @@ const Navbar = () => {
                   <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>
                   : <div>
                     <span className='user-container'>
-                      <img className='img-user' src={assets.Profile} alt="" />
+                      <img className='img-user' src={image ? image : assets.Profile} alt="" />
                       <div className="dropdownmenu">
                         <ul>
                           <li onClick={() => navigate('/user-orders')} >Orders</li>

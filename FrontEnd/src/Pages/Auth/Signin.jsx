@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import './Auth.css'
 import axios from 'axios'
+import { assets } from '../../assets/assets'
 import * as Icon from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import { hideLoginModal, LoggedInUser, SetToken } from '../../app/features/AuthSlice'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify';
 const Signin = () => {
-  const [currentState, setCurrentState] = useState("Signup")
+  const [currentState, setCurrentState] = useState("Login")
   const dispatch = useDispatch();
   const hideModal = (boolValue) => {
     dispatch(hideLoginModal(boolValue))
@@ -18,7 +19,9 @@ const Signin = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [image, setImage] = useState("");
   const _api_url = "http://localhost:4000/api/userauth"
+ 
   const HandleSubmitForm = async (e) => {
     setLoading(true)
     e.preventDefault();
@@ -29,18 +32,19 @@ const Signin = () => {
       }
       const newUrl = _api_url + "/Signin"
       const response = await axios.post(newUrl, _userData)
-      console.log("info", response.data)
       if (response.data.success) {
         dispatch(SetToken(response.data.token));
         const existingUser = {
-          userRole: response.data.exsistingUser.userRole,
           name: response.data.exsistingUser.name,
-          email: response.data.exsistingUser.email
+          email: response.data.exsistingUser.email,
+          image: response.data.exsistingUser.image,
+          userRole: response.data.exsistingUser.userRole,
         }
-        dispatch(LoggedInUser(existingUser));
         setLoading(false);
+        dispatch(LoggedInUser(existingUser));
         localStorage.setItem("userToken", response.data.token)
-        console.log(response);
+        localStorage.setItem("user", JSON.stringify(existingUser));
+        localStorage.setItem("user", JSON.stringify(existingUser))
         setEmail("");
         setPassword("");
         toast.success(response.data.message);
@@ -54,27 +58,36 @@ const Signin = () => {
 
     }
     else {
-      const _userData = {
-        name: username,
-        email: email,
-        password: password
+      const _userData = new FormData();
+      _userData.append('name', username);
+      _userData.append('email', email);
+      _userData.append('password', password);
+      if (image) {
+        _userData.append('image', image);
       }
+      console.log("request data", _userData)
       const newUrl = _api_url + "/Signup"
-      const response = await axios.post(newUrl, _userData)
+      const response = await axios.post(newUrl, _userData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       if (response.data.success) {
         const newUser = {
           name: response.data.user.name,
           email: response.data.user.email,
+          image: response.data.user.image,
           userRole: response.data.user.Role,
         }
         localStorage.setItem("userToken", response.data.token)
+        localStorage.setItem("user", JSON.stringify(newUser))
         dispatch(LoggedInUser(newUser));
         dispatch(SetToken(response.data.token));
         setUsername("");
         setEmail("")
         setPassword("");
+        setImage("")
         setLoading(false);
-        console.log(response);
         toast.success(response.data.message)
         hideModal(false)
       }
@@ -96,6 +109,21 @@ const Signin = () => {
               <h3>{currentState}</h3>
               <span onClick={() => hideModal(false)} className='cross-button'><Icon.XLg /></span>
             </div>
+            {currentState === "Signup" ?
+              <div className="d-flex flex-column justify-content-center align-items-center">
+                <label htmlFor="image">
+                  <img className={`${image ? "upload-selfie-image" : "uploadimg-selfie"}`}
+                    src={image ? URL.createObjectURL(image) : assets.UploadImage}
+                    alt="" />
+                </label>
+                <input onChange={(e) => setImage(e.target.files[0])}
+                  type="file"
+                  name="image"
+                  id="image"
+                  hidden required />
+                <p htmlFor="Image" className='fw-bold text-danger'>Upload Selfie</p>
+              </div> :
+              <></>}
             <div className="login-popup-input">
               <div className="mb-3">
                 {currentState === "Login" ? <></> :

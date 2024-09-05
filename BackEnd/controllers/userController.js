@@ -16,6 +16,7 @@ const UserSignInController = async (req, res) => {
         .status(404)
         .send({ message: "pelase enter email and password" });
     }
+
     // checking user exsisting
     const IsExistingUser = await userModel.findOne({ email: email });
     if (!IsExistingUser) {
@@ -44,6 +45,7 @@ const UserSignInController = async (req, res) => {
         name: IsExistingUser.name,
         email: IsExistingUser.email,
         userRole: IsExistingUser.Role,
+        image: IsExistingUser.image,
       },
       token,
     });
@@ -70,6 +72,7 @@ const UserSignupController = async (req, res) => {
     if (!email) {
       return res.send({ message: "email is required." });
     }
+
     const IsAlreadyExists = await userModel.findOne({ email });
     if (IsAlreadyExists) {
       return res.status(200).send({
@@ -99,6 +102,7 @@ const UserSignupController = async (req, res) => {
       email,
       Role: userRoleEnums.isUser,
       password: HasehdPassword,
+      image: req.file.buffer,
     });
     const user = await NewUser.save();
     const token = createToken(user._id);

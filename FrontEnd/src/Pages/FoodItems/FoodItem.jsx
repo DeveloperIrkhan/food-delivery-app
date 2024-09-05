@@ -19,9 +19,7 @@ const FoodItem = ({ category }) => {
             setLoading(true)
             const response = await axios.get("http://localhost:4000/api/food/getAllFood")
             if (response.data.success) {
-                toast.success(response.data.message)
                 setLoading(false)
-                console.log(response.data.foods)
                 setFootItems(response.data.foods)
             }
         } catch (error) {

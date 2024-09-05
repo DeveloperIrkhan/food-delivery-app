@@ -4,7 +4,6 @@ import Spinner from '../../Components/Spinner/Spinner'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { RetriveCategories } from '../../app/features/categorySlice'
-import { categories } from '../../DummyAPIdata/categoryAPI'
 const ExploreMenu = ({ category, setCategory }) => {
     const [allCategories, setAllCategories] = useState([]);
     const [loading, setLoading] = useState(true);

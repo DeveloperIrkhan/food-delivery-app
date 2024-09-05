@@ -7,7 +7,7 @@ import Home from './Pages/Home/Home'
 import Order from './Pages/OurOrders/Order'
 import 'react-toastify/dist/ReactToastify.css';
 import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
-import { SetToken } from './app/features/AuthSlice'
+import { LoggedInUser, SetToken } from './app/features/AuthSlice'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 function App() {
@@ -26,6 +26,8 @@ function App() {
   )
   useEffect(() => {
     const GetUserToken = () => {
+      if (localStorage.getItem("user"))
+        dispatch(LoggedInUser(JSON.parse(localStorage.getItem("user"))));
       if (localStorage.getItem("userToken"))
         dispatch(SetToken(localStorage.getItem("userToken")));
     };

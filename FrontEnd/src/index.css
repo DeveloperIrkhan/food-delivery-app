@@ -59,8 +59,23 @@ hr {
 }
 .upload-food-image {
   margin: 10px 50px;
-  height: 150px;
-  width: 250px;
+  height: 100px;
+  width: 100px;
+}
+.upload-selfie-image {
+  margin: 10px 50px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 2px solid #dddada;
+  
+}
+.uploadimg-selfie{
+  border-radius: 100%;
+  padding: 1vmin;
+  margin: 10px 10px;
+  border: 2px solid #dddada;
+
 }
 .uploadimg {
   margin: 10px 10px;

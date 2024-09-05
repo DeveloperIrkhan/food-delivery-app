@@ -3,9 +3,15 @@ import {
   UserSignInController,
   UserSignupController,
 } from "../controllers/userController.js ";
-const userRoutes = express.Router();
+import multer from "multer";
 
-userRoutes.post("/Signup", UserSignupController);
+const userRoutes = express.Router();
+//to store image as byte[] in db
+const storage = multer.memoryStorage();
+const upload = multer({storage:storage})
+
+userRoutes.post("/Signup",upload.single("image"), UserSignupController);
+//userRoutes.post("/Signup", UserSignupController);
 userRoutes.post("/SignIn", UserSignInController);
 
 export default userRoutes;
