@@ -158,7 +158,7 @@ const Signin = () => {
                   <input name='password'
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    type="text"
+                    type="password"
                     className="form-control"
                     id="password"
                     required

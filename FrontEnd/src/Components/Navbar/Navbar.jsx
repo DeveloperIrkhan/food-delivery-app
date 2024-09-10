@@ -1,46 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import * as Icon from 'react-bootstrap-icons'
 import './Navbar.css';
-import { useDispatch, useSelector } from 'react-redux';
 import { assets } from '../../assets/assets';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { SetToken, showLoginModal } from '../../app/features/AuthSlice';
+import { NavLink } from 'react-router-dom';
 import Signin from '../../Pages/Auth/Signin';
+import { useNavbarLogic } from './NavbarLogic';
 
 const Navbar = () => {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const Quantity = useSelector(state => state.cartSlice.totalItems);
-  const ShowLoginScreen = useSelector(state => state.authSlice.showLogin)
-  const token = useSelector(state => state.authSlice.Token)
-  const userModel = useSelector(state => state.authSlice.user)
-  const [image, setImage] = useState(null);
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  useEffect(() => {
-    console.log("savedUser", userModel);
-    const userCreds = userModel
-    console.log("savedUser", userCreds);
-    if (userCreds && userCreds?.image && userCreds?.image?.data) {
-      const byteArray = new Uint8Array(userCreds?.image?.data);
-      const base64String = btoa(
-        byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
-      );
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    } else {
-      console.log("No image found for user");
-    }
-  }, [userModel])
-  const logout = () => {
-    localStorage.removeItem("userToken")
-    localStorage.removeItem("user")
-    dispatch(SetToken(""))
-  }
-  const toggleMenu = () => {
-    setMenuOpen(!menuOpen);
-  };
-  const ShowModal = (item) => {
-    dispatch(showLoginModal(item))
-  }
+  const { menuOpen,
+    Quantity,
+    ShowLoginScreen,
+    token,
+    image,
+    toggleMenu,
+    logout,
+    ShowModal,
+    navigate, } = useNavbarLogic();
   return (
     <>
       <div className="position-relative">
@@ -69,7 +43,7 @@ const Navbar = () => {
               )}
               <div className="cart-quantity">{Quantity}</div>
             </NavLink>
-            <div className="dot">
+            <div className="dot mx-3">
               {
                 !token ?
                   <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>

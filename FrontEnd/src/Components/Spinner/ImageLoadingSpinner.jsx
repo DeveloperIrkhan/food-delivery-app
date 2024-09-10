@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Spinner from './Spinner'
 
-const ImageLoadingSpinner = ({ SorceFile, Alt, classes }) => {
+const ImageLoadingSpinner = ({ SorceFile, Alt }) => {
     const [loading, setLoading] = useState(true)
     return (
         <div className="position-relxative">
@@ -10,7 +10,7 @@ const ImageLoadingSpinner = ({ SorceFile, Alt, classes }) => {
                     <div className="screen">
                         <div className="overflow-hidden">
                             <div className="d-flex align-items-center justify-content-center">
-                                <img src='../src/assets/Loading.svg' className={`${classes} img-fluid`} />
+                                <img src='../src/assets/Loading.svg' className={`p-1 img-fluid`} />
                             </div>
                         </div>
                     </div>

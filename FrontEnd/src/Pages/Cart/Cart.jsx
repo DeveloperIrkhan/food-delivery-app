@@ -8,6 +8,7 @@ const Cart = () => {
   const totalItems = useSelector(state => state.cartSlice.totalItems);
   const TotalAmount = useSelector(state => state.cartSlice.totalAmount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
+  console.log(cartList)
   const navigate = useNavigate()
   return (
     <>
