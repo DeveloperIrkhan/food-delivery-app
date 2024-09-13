@@ -12,16 +12,16 @@ export const useNavbarLogic = () => {
   const userModel = useSelector((state) => state.authSlice.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   useEffect(() => {
     const userCreds = userModel;
-    if (userCreds && userCreds?.image && userCreds?.image?.data) {
-      const byteArray = new Uint8Array(userCreds?.image?.data);
-      const base64String = btoa(
-        byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
-      );
-      setImage(`data:image/jpeg;base64,${base64String}`);
-    }
+    //this is for byte[] image
+    // if (userCreds && userCreds?.image && userCreds?.image?.data) {
+    //   const byteArray = new Uint8Array(userCreds?.image?.data);
+    //   const base64String = btoa(
+    //     byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
+    //   );
+      setImage(`http://localhost:4000/images/${userCreds.image}`);
+    // }
   }, [userModel]);
 
   const toggleMenu = () => {

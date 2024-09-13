@@ -72,6 +72,7 @@ const UserSignupController = async (req, res) => {
     if (!email) {
       return res.send({ message: "email is required." });
     }
+    const imageName = req.file.filename;
 
     const IsAlreadyExists = await userModel.findOne({ email });
     if (IsAlreadyExists) {
@@ -102,7 +103,10 @@ const UserSignupController = async (req, res) => {
       email,
       Role: userRoleEnums.isUser,
       password: HasehdPassword,
-      image: req.file.buffer,
+      //this is saving image as byte[]
+      // image: req.file.buffer,
+      //this is saving image as string
+      image: imageName,
     });
     const user = await NewUser.save();
     const token = createToken(user._id);

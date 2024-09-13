@@ -1,10 +1,63 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
+const APIURL = "http://localhost:4000/api/";
+export const fetchCartData = createAsyncThunk(
+  "cart/fetchCartItems",
+  async () => {
+    try {
+      const token = localStorage.getItem("userToken");
+      if (!token) {
+        console.log("no token found...");
+      }
+
+      await axios.get(APIURL + "cart/GetAllCartItems", {
+        headers: {
+          token: `${token}`,
+        },
+      });
+    } catch (error) {
+      console.log(error.response.data);
+    }
+  }
+);
+export const AddCartData = createAsyncThunk(
+  "cart/addCartItems",
+  async ({ itemId }, { rejectWithValue }) => {
+    try {
+      const token = localStorage.getItem("userToken");
+      if (!token) {
+        console.log("No token found...");
+        return rejectWithValue("No token found");
+      }
+
+      const response = await axios.post(
+        `${APIURL}cart/AddtoCart`,
+        { itemId },
+        {
+          headers: {
+            token: `${token}`,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.log(error.response?.data || error.message);
+      return rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
 
 const initialState = {
   cartItems: [],
+  dbCartItems: [],
   totalAmount: 0,
   totalItems: 0,
+  isLoading: false,
+  status: "idle",
 };
 
 export const cartSlice = createSlice({
@@ -60,6 +113,19 @@ export const cartSlice = createSlice({
       }
       state.totalItems = state.cartItems.length;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCartData.fulfilled, (state, action) => {
+      state.dbCartItems = action.payload;
+      state.status = "succeeded";
+    });
+    builder.addCase(fetchCartData.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchCartData.rejected, (state, action) => {
+      state.error = action.payload;
+      state.status = "rejected";
+    });
   },
 });
 

@@ -8,7 +8,6 @@ const Cart = () => {
   const totalItems = useSelector(state => state.cartSlice.totalItems);
   const TotalAmount = useSelector(state => state.cartSlice.totalAmount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
-  console.log(cartList)
   const navigate = useNavigate()
   return (
     <>
@@ -34,7 +33,7 @@ const Cart = () => {
                   <p className="h4 fw-semibold text-dark">Order summary</p>
                   <div className="mt-4 border-top">
                     {cartList.map((item) => (
-                      <dl className="d-flex justify-content-between pt-2">
+                      <dl  key={item._id} className="d-flex justify-content-between pt-2">
                         <dt className="">{item.name} x{item.OrderQuantity}</dt>
                         <dd className="">Rs/- {item.OrderQuantity * item.price} </dd>
                       </dl>
@@ -57,7 +56,7 @@ const Cart = () => {
                   </div>
                   <div className="d-flex justify-content-center mt-3 top-border">
                     <input className='form-control' placeholder='Promo Code here' />
-                    <button  className='btn btn-dark'>Submit</button>
+                    <button className='btn btn-dark'>Submit</button>
                   </div>
                 </div>
               </div>

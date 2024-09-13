@@ -1,7 +1,21 @@
 import userModel from "../models/userModel.js";
 
 const GetAllCartItemsController = async (req, resp) => {
-  resp.send({ status: "success", message: "all items retrieved" });
+  try {
+    const userId = req.body.userId;
+    const user = await userModel.findOne({ _id: userId });
+    if (user) {
+      let cartItems = (await user.cartData) || {};
+      return resp.status(200).send({
+        status: "success",
+        message: "all items retrieved",
+        cartItems,
+      });
+    }
+    return resp
+      .status(200)
+      .send({ status: "false", message: "something went wrong." });
+  } catch (error) {}
 };
 const AddToCartController = async (req, resp) => {
   try {

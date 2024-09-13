@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as Icon from 'react-bootstrap-icons'
 import './Fooditem.css'
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
+import Roundedbtn from '../../Components/buttons/Roundedbtn'
 const FoodCard = ({ item }) => {
     const [itemCount, setItemCount] = useState(0);
     const dispatch = useDispatch();
@@ -26,9 +27,9 @@ const FoodCard = ({ item }) => {
         <div className="col-md-3 col-12 gap-3 mb-3 food-item">
             <div className="card shadow-sm rounded">
                 <div className="food-item-img-container overflow-hidden">
-                    <ImageLoadingSpinner 
-                    className="card-img-top" 
-                    SorceFile={`http://localhost:4000/images/${item.image}`} Alt="cartItem" />
+                    <ImageLoadingSpinner
+                        className="card-img-top"
+                        SorceFile={`http://localhost:4000/images/${item.image}`} Alt="cartItem" />
                 </div>
                 <div className="card-body food-item-info">
                     <div className="food-item-rating">
@@ -49,18 +50,7 @@ const FoodCard = ({ item }) => {
                         <div className='food-item-price d-flex align-items-center'>Rs/- {item.price}</div>
                     </div>
                     <div className='d-flex justify-content-end mt-3 align-items-center'>
-                        {existingItem ? (
-                            <button className='btn cart-button' onClick={() => RemoveFromCart(item)}>
-                                Remove
-                            </button>
-                        ) : (
-                            <button className='btn cart-button' onClick={() => AddCart(item)}>
-                                Order
-                            </button>
-                        )}
-                        {/* <button className='btn cart-button' onClick={() => AddCart(item)}>
-                            Order
-                        </button> */}
+                        <Roundedbtn onclickFun={existingItem ? () => RemoveFromCart(item) : () => AddCart(item)} cssClass={"btn cart-button"} text={existingItem ? "Remove" : "Order"} />
                     </div>
                 </div>
             </div>
