@@ -7,7 +7,7 @@ import Home from './Pages/Home/Home'
 import Order from './Pages/OurOrders/Order'
 import 'react-toastify/dist/ReactToastify.css';
 import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
-import { LoggedInUser, SetToken } from './app/features/AuthSlice'
+import { LoggedInUser, SetToken } from './app/features/UserAuth/AuthSlice'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 function App() {

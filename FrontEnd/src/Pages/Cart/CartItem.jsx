@@ -1,8 +1,9 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { DecrementItem, IncrementItem } from '../../app/features/CartSlice';
+import { IncrementItem, DecrementItem } from '../../app/features/AddToCart/CartSlice';
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
 import './cart.css'
+import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS';
 const CartItem = ({ cartitems }) => {
     const dispatch = useDispatch();
     const AddToCartitem = (cartitems) => {
@@ -18,7 +19,7 @@ const CartItem = ({ cartitems }) => {
                 <div className="row g-0">
                     <div className="col-md-5">
                         <ImageLoadingSpinner className="img-fluid rounded-lg shopingcart-img"
-                            SorceFile={`http://localhost:4000/images/${cartitems.image}`} Alt={cartitems.name} />
+                            SorceFile={`${API_ENDPOINTS.getImages}/${cartitems.image}`} Alt={cartitems.name} />
                     </div>
                     <div className="col-md-7" style={{ position: "relative" }}>
                         <div className="card-body">

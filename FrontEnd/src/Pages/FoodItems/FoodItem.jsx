@@ -1,39 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import FoodCard from './FoodCard'
 import { toast } from 'react-toastify'
-import { useDispatch, useSelector } from 'react-redux'
-import { RetriveAllFoodItems } from '../../app/features/categorySlice'
-import { AllFoodsItems } from '../../DummyAPIdata/categoryAPI'
-import { AddCartData, fetchCartData } from '../../app/features/CartSlice'
 import Spinner from '../../Components/Spinner/Spinner'
+import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
 const FoodItem = ({ category }) => {
     const [loading, setLoading] = useState(true);
-    const dispatch = useDispatch();
     const [footitems, setFootItems] = useState([])
-
-    const cart_fetching_data = useSelector((state) => state.cartSlice);
-    // const { AllFoodsItems } = useContext(StoreContext)
-    useEffect(() => {
-        dispatch(RetriveAllFoodItems(AllFoodsItems))
-    }, [dispatch]);
     const fetchAllFoodItems = async () => {
         try {
             setLoading(true)
-            const response = await axios.get("http://localhost:4000/api/food/getAllFood")
+            const response = await axios.get(API_ENDPOINTS.getAllFoodItems)
             if (response.data.success) {
                 setLoading(false)
                 setFootItems(response.data.foods)
+                console.log("foodItems",footitems)
             }
         } catch (error) {
             toast.error(response.data.message)
         }
     }
     useEffect(() => {
-        console.log("cart_fetching_data", cart_fetching_data)
         fetchAllFoodItems();
-        dispatch(fetchCartData())
-        dispatch(AddCartData({ itemId: "66d4b7cece358cb7697ae50c" }))
+        // dispatch(fetchCartData())
+        // dispatch(AddCartData({ itemId: "66d4b7cece358cb7697ae50c" }))
     }, []);
     return (
         <div id='food-item' className='container-fluid'>

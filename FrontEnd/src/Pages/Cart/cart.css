@@ -1,8 +1,14 @@
 .cart-image {
-  padding:5px;
-  border-radius: 10px;
-  height: 200px!important;
+  /* padding:5px; */
+  /* border-radius: 10px; */
+  height: 200px !important;
 }
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
 .inc-button {
   border-radius: 50%;
   width: 25px;
@@ -11,18 +17,17 @@
   border: none;
   color: white;
 }
-.increment-quantity{
-    margin: auto;
-    margin-right: 100px;
-    margin-bottom: 10px;
+.increment-quantity {
+  margin: auto;
+  margin-right: 100px;
+  margin-bottom: 10px;
 }
-.shopingcart-img{
+.shopingcart-img {
   border: 1px solid rgb(223, 223, 222);
-    background: rgb(238, 236, 236);
+  background: rgb(238, 236, 236);
 }
 
-
-.button-primary{
+.button-primary {
   background-color: transparent;
   border: 1px solid var(--second-color);
   padding: 3px 7px;

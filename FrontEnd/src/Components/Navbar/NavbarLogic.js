@@ -1,15 +1,22 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SetToken, showLoginModal } from "../../app/features/AuthSlice";
+import {
+  showLoginModal,
+  _loginModal,
+  _token,
+  SetToken,
+  _user,
+} from "../../app/features/UserAuth/AuthSlice";
 import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../../API EndPoints/API_ENDPOINTS";
 
 export const useNavbarLogic = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [image, setImage] = useState(null);
   const Quantity = useSelector((state) => state.cartSlice.totalItems);
-  const ShowLoginScreen = useSelector((state) => state.authSlice.showLogin);
-  const token = useSelector((state) => state.authSlice.Token);
-  const userModel = useSelector((state) => state.authSlice.user);
+  const ShowLoginScreen = useSelector(_loginModal);
+  const token = localStorage.getItem("userToken");
+  const userModel = useSelector(_user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -20,7 +27,7 @@ export const useNavbarLogic = () => {
     //   const base64String = btoa(
     //     byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
     //   );
-      setImage(`http://localhost:4000/images/${userCreds.image}`);
+    setImage(`${API_ENDPOINTS.getImages}/${userCreds.image}`);
     // }
   }, [userModel]);
 
@@ -31,6 +38,7 @@ export const useNavbarLogic = () => {
     localStorage.removeItem("userToken");
     localStorage.removeItem("user");
     dispatch(SetToken(""));
+    navigate('/home')
   };
 
   const ShowModal = (item) => {

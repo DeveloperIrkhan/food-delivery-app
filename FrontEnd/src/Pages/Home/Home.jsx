@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import OurFood from '../Our Foods/OurFood'
-import ExploreMenu from '../MenuSection/ExploreMenu'
+import CategoriesMenu from '../FoodCategories/CategoriesMenu'
 import FoodItem from '../../Pages/FoodItems/FoodItem'
 import Banner from '../../Components/banner/Banner'
 import MobileStore from '../../Components/Mobile/MobileStore'
 import AboutUs from '../../Components/About us/AboutUs'
-import Footer from '../../Components/Footer/Footer'
 
 
 const Home = () => {
@@ -14,7 +13,7 @@ const Home = () => {
         <div>
             <Banner />
             <OurFood />
-            <ExploreMenu category={category} setCategory={setCategory} />
+            <CategoriesMenu category={category} setCategory={setCategory} />
             <FoodItem category={category} />
             <MobileStore/>
             <AboutUs/>

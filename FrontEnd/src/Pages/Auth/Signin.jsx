@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
 import './Auth.css'
-import axios from 'axios'
 import { assets } from '../../assets/assets'
 import * as Icon from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
-import { hideLoginModal, LoggedInUser, SetToken } from '../../app/features/AuthSlice'
+import {
+  hideLoginModal, _loginModal,
+  useSignInMutation, useSignUpMutation, LoggedInUser
+} from '../../app/features/UserAuth/AuthSlice'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify';
 const Signin = () => {
@@ -14,50 +16,35 @@ const Signin = () => {
     dispatch(hideLoginModal(boolValue))
   }
 
-  const isModelOpen = useSelector(state => state.authSlice.showLogin)
+
+
+  const [isSignIn] = useSignInMutation();
+  const [isSignUp] = useSignUpMutation();
+  const isModelOpen = useSelector(_loginModal)
   const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [image, setImage] = useState("");
-  const _api_url = "http://localhost:4000/api/userauth"
- 
+
   const HandleSubmitForm = async (e) => {
     setLoading(true)
     e.preventDefault();
     if (currentState === "Login") {
-      const _userData = {
-        email: email,
-        password: password
-      }
-      const newUrl = _api_url + "/Signin"
-      const response = await axios.post(newUrl, _userData)
-      if (response.data.success) {
-        dispatch(SetToken(response.data.token));
-        const existingUser = {
-          name: response.data.exsistingUser.name,
-          email: response.data.exsistingUser.email,
-          image: response.data.exsistingUser.image,
-          userRole: response.data.exsistingUser.userRole,
-        }
-        setLoading(false);
-        dispatch(LoggedInUser(existingUser));
-        localStorage.setItem("userToken", response.data.token)
-        localStorage.setItem("user", JSON.stringify(existingUser));
-        localStorage.setItem("user", JSON.stringify(existingUser))
+      const signinResponse = await isSignIn({ email, password }).unwrap();
+      if (signinResponse.success) {
         setEmail("");
         setPassword("");
-        toast.success(response.data.message);
+        toast.success(signinResponse.message);
         hideModal(false)
-
       }
       else {
-        toast.error(response.data.message)
+        toast.error(signinResponse.message)
         setLoading(false);
       }
-
     }
     else {
+      console.log(currentState)
       const _userData = new FormData();
       _userData.append('name', username);
       _userData.append('email', email);
@@ -65,34 +52,20 @@ const Signin = () => {
       if (image) {
         _userData.append('image', image);
       }
-      console.log("request data", _userData)
-      const newUrl = _api_url + "/Signup"
-      const response = await axios.post(newUrl, _userData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      if (response.data.success) {
-        const newUser = {
-          name: response.data.user.name,
-          email: response.data.user.email,
-          image: response.data.user.image,
-          userRole: response.data.user.Role,
-        }
-        localStorage.setItem("userToken", response.data.token)
-        localStorage.setItem("user", JSON.stringify(newUser))
-        dispatch(LoggedInUser(newUser));
-        dispatch(SetToken(response.data.token));
+      const signupResponse = await isSignUp(_userData).unwrap();
+      console.log("signup called")
+      if (signupResponse.success) {
+        dispatch(LoggedInUser(_userData));
         setUsername("");
         setEmail("")
         setPassword("");
         setImage("")
         setLoading(false);
-        toast.success(response.data.message)
+        toast.success(signupResponse.message)
         hideModal(false)
       }
       else {
-        toast.error(response.data.message)
+        toast.error(signupResponse.message)
         setLoading(false);
       }
     }

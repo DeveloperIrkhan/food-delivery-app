@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { API_ENDPOINTS } from "../../../API EndPoints/API_ENDPOINTS";
 
-const APIURL = "http://localhost:4000/api/";
 export const fetchCartData = createAsyncThunk(
   "cart/fetchCartItems",
   async () => {
@@ -11,7 +11,7 @@ export const fetchCartData = createAsyncThunk(
         console.log("no token found...");
       }
 
-      await axios.get(APIURL + "cart/GetAllCartItems", {
+      await axios.get(API_ENDPOINTS.GET_ALL_CART_ITEMS, {
         headers: {
           token: `${token}`,
         },
@@ -22,7 +22,7 @@ export const fetchCartData = createAsyncThunk(
   }
 );
 export const AddCartData = createAsyncThunk(
-  "cart/addCartItems",
+  API_ENDPOINTS.CART_ADD_ITEM,
   async ({ itemId }, { rejectWithValue }) => {
     try {
       const token = localStorage.getItem("userToken");
@@ -132,3 +132,7 @@ export const cartSlice = createSlice({
 export const { clearCart, addToCart, IncrementItem, DecrementItem } =
   cartSlice.actions;
 export default cartSlice.reducer;
+
+export const _cartItems = (state) => state.cartSlice.cartItems;
+export const _totalItems = (state) => state.cartSlice.totalItems;
+export const _totalAmount = (state)=> state.cartSlice.totalAmount

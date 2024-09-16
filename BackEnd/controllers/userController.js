@@ -14,13 +14,13 @@ const UserSignInController = async (req, res) => {
     if (!email || !password) {
       return res
         .status(404)
-        .send({ message: "pelase enter email and password" });
+        .json({ message: "pelase enter email and password" });
     }
 
     // checking user exsisting
     const IsExistingUser = await userModel.findOne({ email: email });
     if (!IsExistingUser) {
-      return res.status(200).send({
+      return res.status(200).json({
         success: false,
         message: `this user ${email} is not registered yet`,
       });
@@ -31,14 +31,14 @@ const UserSignInController = async (req, res) => {
       IsExistingUser.password
     );
     if (!IsPasswordMatched) {
-      return res.status(200).send({
+      return res.status(200).json({
         success: false,
         message: "password doesn't matched....",
       });
     }
     // generating new token
     const token = createToken(IsExistingUser._id);
-    return res.status(200).send({
+    return res.status(200).json({
       success: true,
       message: "user login successfully...",
       exsistingUser: {
@@ -51,7 +51,7 @@ const UserSignInController = async (req, res) => {
     });
   } catch (error) {
     console.log(error);
-    res.status(500).send({
+    res.status(500).json({
       success: false,
       message: "Error while login",
       error,
@@ -64,33 +64,33 @@ const UserSignupController = async (req, res) => {
   try {
     const { name, password, email } = req.body;
     if (!name) {
-      return res.send({ message: "name is required." });
+      return res.json({ message: "name is required." });
     }
     if (!password) {
-      return res.send({ message: "password is required." });
+      return res.json({ message: "password is required." });
     }
     if (!email) {
-      return res.send({ message: "email is required." });
+      return res.json({ message: "email is required." });
     }
     const imageName = req.file.filename;
 
     const IsAlreadyExists = await userModel.findOne({ email });
     if (IsAlreadyExists) {
-      return res.status(200).send({
+      return res.status(200).json({
         success: false,
         message: `this user ${email} already exist`,
       });
     }
     //validating user email
     if (!validator.isEmail(email)) {
-      return res.status(200).send({
+      return res.status(200).json({
         success: false,
         message: `provided email ${email} is not correct`,
       });
     }
     //validating strong password of user
     if (password.length < 8) {
-      return res.status(200).send({
+      return res.status(200).json({
         success: false,
         message: "Please enter minimum 8 digits password",
       });
@@ -110,15 +110,15 @@ const UserSignupController = async (req, res) => {
     });
     const user = await NewUser.save();
     const token = createToken(user._id);
-    return res.status(200).send({
+    return res.status(200).json({
       success: true,
       message: "New user register successfully",
       user,
       token,
     });
   } catch (error) {
-    console.log(error);
-    return res.status(500).send({
+    console.error(error);
+    return res.status(500).json({
       success: false,
       message: "Error white registering user!",
       error,

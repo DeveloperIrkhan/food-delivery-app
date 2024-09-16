@@ -21,8 +21,8 @@ const Navbar = () => {
         {ShowLoginScreen ? <Signin /> : <></>}
       </div>
       <div className="container-fluid position-relative">
-        <div className="navbar fixed m-0 px-3 d-flex justify-content-between align-items-center">
-          <div>
+        <div className="navbar fixed m-0 px-3  d-flex  justify-content-between align-items-center">
+          <div className=''>
             <img className="full-logo" src={assets.FullLogo} alt="Logo" />
             <img className="small-logo" src={assets.miniLogo} alt="Logo" />
           </div>
@@ -34,7 +34,7 @@ const Navbar = () => {
             <a href="#about-us" className="under-">About Us</a>
           </div>
 
-          <div className="cart-container d-flex align-items-center gap-3">
+          <div className=" cart-container d-flex align-items-center gap-3">
             <NavLink to="user-cart" className="bg-none carts-container">
               {Quantity > 0 ? (
                 <img className="cart-img" src={assets.Fullcarticon} alt="Cart" />
@@ -66,7 +66,7 @@ const Navbar = () => {
 
 
           {/* Hamburger Menu Button */}
-          <div className="hamb urger-menu" onClick={toggleMenu}>
+          <div className="d-lg-none d-block hamb urger-menu" onClick={toggleMenu}>
             {
               menuOpen ? <span><Icon.XLg /></span> :
                 <span>
