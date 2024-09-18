@@ -29,7 +29,8 @@
   .banner-text {
     position: absolute;
     left: 0;
-    top: 20%;
+    top: 50%;
+    bottom: 50%;
     right: 0;
   }
   .banner-heading {

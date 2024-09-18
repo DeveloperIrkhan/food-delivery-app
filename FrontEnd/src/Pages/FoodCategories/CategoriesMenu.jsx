@@ -4,7 +4,6 @@ import { useGetCategoriesQuery } from "../../app/features/gettingCategories and 
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
 const CategoriesMenu = ({ category, setCategory }) => {
     const { data: categories, isLoading } = useGetCategoriesQuery();
-    console.log(categories)
     return (
         <div id='explore-menu' className="d-flex justify-content-center align-items-center flex-column mt-5">
             {isLoading ? <Spinner /> : ""}

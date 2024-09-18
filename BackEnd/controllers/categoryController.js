@@ -76,17 +76,20 @@ const RemoveCategoryController = async (request, response) => {
 const GetAllCategoriesController = async (request, response) => {
   try {
     const categories = await categoryModel.find({});
-    return response.status(200).send({
-      success: true,
-      message: "categories fetched successfully",
-      Totalcategories: categories.length,
-      categories,
-    });
+    if (categories) {
+      return response.status(200).send({
+        success: true,
+        message: "categories fetched successfully",
+        Totalcategories: categories.length,
+        categories,
+      });
+    }
+    return response.json({success:false, message: "no category found"})
   } catch (error) {
     console.log(error);
-    return resp.status(400).send({
+    return response.status(400).send({
       success: false,
-      message: "Error while creating new category",
+      message: "Error retriving category",
       error,
     });
   }

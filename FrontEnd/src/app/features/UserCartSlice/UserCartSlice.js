@@ -110,6 +110,7 @@ export const UserCart = createSlice({
       state.status = "succeeded";
     });
     _builder.addCase(fetchingCartItemThunk.rejected, (state, action) => {
+      console.log(action.payload)
       state.status = "failed";
       state.error = action.payload.error.message;
     });
