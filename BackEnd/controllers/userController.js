@@ -2,15 +2,16 @@ import userModel from "../models/userModel.js";
 import validator from "validator";
 import {
   ComparePasswordAsync,
-  createToken,
+  createAccessToken,
+  createRefreshToken,
   PasswordHashing,
 } from "../helpers/authHelper.js";
 import { userRoleEnums } from "../Enums/userRolesEnums.js";
 
 //Login User
-const UserSignInController = async (req, res) => {
+const UserSignInController = async (request, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password } = request.body;
     if (!email || !password) {
       return res
         .status(404)
@@ -37,7 +38,22 @@ const UserSignInController = async (req, res) => {
       });
     }
     // generating new token
-    const token = createToken(IsExistingUser._id);
+    const accessToken = createAccessToken(IsExistingUser._id);
+    const refreshToken = createRefreshToken(IsExistingUser._id);
+    res.cookie("accessToken", accessToken, {
+      // httpOnly: true, // Ensures the cookie is accessible only by the web server
+      secure: true, // Ensures cookies are sent only over HTTPS in production
+      // sameSite: "Strict", // Prevents cross-site request forgery
+      maxAge: 24 * 60 * 60 * 1000, // Sets cookie expiration (1 day in this case)
+      path: "/",
+    });
+    res.cookie("refreshToken", refreshToken, {
+      // httpOnly: true,
+      secure: true,
+      // sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // Refresh token expiration (7 days in this case)
+      path: "/",
+    });
     return res.status(200).json({
       success: true,
       message: "user login successfully...",
@@ -47,7 +63,6 @@ const UserSignInController = async (req, res) => {
         userRole: IsExistingUser.Role,
         image: IsExistingUser.image,
       },
-      token,
     });
   } catch (error) {
     console.log(error);
@@ -60,37 +75,37 @@ const UserSignInController = async (req, res) => {
 };
 
 //SignUp User
-const UserSignupController = async (req, res) => {
+const UserSignupController = async (request, response) => {
   try {
-    const { name, password, email } = req.body;
+    const { name, password, email } = request.body;
     if (!name) {
-      return res.json({ message: "name is required." });
+      return response.json({ message: "name is required." });
     }
     if (!password) {
-      return res.json({ message: "password is required." });
+      return response.json({ message: "password is required." });
     }
     if (!email) {
-      return res.json({ message: "email is required." });
+      return response.json({ message: "email is required." });
     }
-    const imageName = req.file.filename;
+    const imageName = request.file.filename;
 
     const IsAlreadyExists = await userModel.findOne({ email });
     if (IsAlreadyExists) {
-      return res.status(200).json({
+      return response.status(200).json({
         success: false,
         message: `this user ${email} already exist`,
       });
     }
     //validating user email
     if (!validator.isEmail(email)) {
-      return res.status(200).json({
+      return response.status(200).json({
         success: false,
         message: `provided email ${email} is not correct`,
       });
     }
     //validating strong password of user
     if (password.length < 8) {
-      return res.status(200).json({
+      return response.status(200).json({
         success: false,
         message: "Please enter minimum 8 digits password",
       });
@@ -104,21 +119,35 @@ const UserSignupController = async (req, res) => {
       Role: userRoleEnums.isUser,
       password: HasehdPassword,
       //this is saving image as byte[]
-      // image: req.file.buffer,
+      // image: request.file.buffer,
       //this is saving image as string
       image: imageName,
     });
     const user = await NewUser.save();
-    const token = createToken(user._id);
-    return res.status(200).json({
+    const accessToken = createAccessToken(user._id);
+    const refreshToken = createRefreshToken(user._id);
+    response.cookie("accessToken", accessToken, {
+      // httpOnly: true, // Ensures the cookie is accessible only by the web server
+      secure: true, // Ensures cookies are sent only over HTTPS in production
+      // sameSite: "Strict", // Prevents cross-site request forgery
+      maxAge: 24 * 60 * 60 * 1000, // Sets cookie expiration (1 day in this case)
+      path: "/",
+    });
+    response.cookie("refreshToken", refreshToken, {
+      // httpOnly: true,
+      secure: true,
+      // sameSite: "Strict",
+      maxAge: 7 * 24 * 60 * 60 * 1000, // Refresh token expiration (7 days in this case)
+      path: "/",
+    });
+    return response.status(200).json({
       success: true,
       message: "New user register successfully",
       user,
-      token,
     });
   } catch (error) {
     console.error(error);
-    return res.status(500).json({
+    return response.status(500).json({
       success: false,
       message: "Error white registering user!",
       error,

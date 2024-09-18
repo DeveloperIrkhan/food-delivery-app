@@ -1,55 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { API_ENDPOINTS } from "../../../API EndPoints/API_ENDPOINTS";
-
-export const fetchCartData = createAsyncThunk(
-  "cart/fetchCartItems",
-  async () => {
-    try {
-      const token = localStorage.getItem("userToken");
-      if (!token) {
-        console.log("no token found...");
-      }
-
-      await axios.get(API_ENDPOINTS.GET_ALL_CART_ITEMS, {
-        headers: {
-          token: `${token}`,
-        },
-      });
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
-);
-export const AddCartData = createAsyncThunk(
-  API_ENDPOINTS.CART_ADD_ITEM,
-  async ({ itemId }, { rejectWithValue }) => {
-    try {
-      const token = localStorage.getItem("userToken");
-      if (!token) {
-        console.log("No token found...");
-        return rejectWithValue("No token found");
-      }
-
-      const response = await axios.post(
-        `${APIURL}cart/AddtoCart`,
-        { itemId },
-        {
-          headers: {
-            token: `${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      console.log(response.data);
-      return response.data;
-    } catch (error) {
-      console.log(error.response?.data || error.message);
-      return rejectWithValue(error.response?.data || error.message);
-    }
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   cartItems: [],
@@ -114,25 +63,12 @@ export const cartSlice = createSlice({
       state.totalItems = state.cartItems.length;
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(fetchCartData.fulfilled, (state, action) => {
-      state.dbCartItems = action.payload;
-      state.status = "succeeded";
-    });
-    builder.addCase(fetchCartData.pending, (state, action) => {
-      state.isLoading = true;
-    });
-    builder.addCase(fetchCartData.rejected, (state, action) => {
-      state.error = action.payload;
-      state.status = "rejected";
-    });
-  },
 });
 
 export const { clearCart, addToCart, IncrementItem, DecrementItem } =
   cartSlice.actions;
 export default cartSlice.reducer;
-
+export const getStatus = (state) => state.cartSlice.status;
 export const _cartItems = (state) => state.cartSlice.cartItems;
 export const _totalItems = (state) => state.cartSlice.totalItems;
-export const _totalAmount = (state)=> state.cartSlice.totalAmount
+export const _totalAmount = (state) => state.cartSlice.totalAmount;

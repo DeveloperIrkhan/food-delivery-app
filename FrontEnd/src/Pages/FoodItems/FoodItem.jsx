@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 import FoodCard from './FoodCard'
 import { toast } from 'react-toastify'
 import Spinner from '../../Components/Spinner/Spinner'
-import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
 import { useGetFoodsQuery } from '../../app/features/gettingCategories and Fooditems/categorySlice'
 const FoodItem = ({ category }) => {
     const { data: foods, isLoading } = useGetFoodsQuery();

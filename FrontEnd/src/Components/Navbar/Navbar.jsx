@@ -1,20 +1,71 @@
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as Icon from 'react-bootstrap-icons'
-import './Navbar.css';
 import { assets } from '../../assets/assets';
 import { NavLink } from 'react-router-dom';
 import Signin from '../../Pages/Auth/Signin';
-import { useNavbarLogic } from './NavbarLogic';
-
+import Cookies from "js-cookie";
+import './Navbar.css';
+import { totalitems } from "../../app/features/UserCartSlice/UserCartSlice"
+import {
+  showLoginModal, LoggedInUser,
+  _loginModal,
+  _token,
+  SetToken,
+  _user,
+} from "../../app/features/UserAuth/AuthSlice";
+import { useNavigate } from "react-router-dom";
+import { API_ENDPOINTS } from "../../API EndPoints/API_ENDPOINTS";
 const Navbar = () => {
-  const { menuOpen,
-    Quantity,
-    ShowLoginScreen,
-    token,
-    image,
-    toggleMenu,
-    logout,
-    ShowModal,
-    navigate, } = useNavbarLogic();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [image, setImage] = useState(null);
+  const Quantity = useSelector(totalitems);
+  const ShowLoginScreen = useSelector(_loginModal);
+  const token = useSelector(_token);
+  const userModel = useSelector(_user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+  useEffect(() => {
+    const userCreds = userModel;
+    console.log("user creds from first useeffect", userCreds);
+    if (userCreds && userCreds.image) {
+      setImage(`${API_ENDPOINTS.getImages}/${userCreds.image}`);
+    } else {
+      setImage(null);
+    }
+    //this is for byte[] image
+    // if (userCreds && userCreds?.image && userCreds?.image?.data) {
+    //   const byteArray = new Uint8Array(userCreds?.image?.data);
+    //   const base64String = btoa(
+    //     byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
+    //   );
+    // }
+  }, [userModel, token]);
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    if (storedUser) {
+      dispatch(LoggedInUser(storedUser));
+      if (storedUser.image) {
+        console.log("user creds from second useeffect", storedUser);
+        setImage(`${API_ENDPOINTS.getImages}/${storedUser.image}`);
+      } else setImage(null)
+    }
+  }, [dispatch]);
+
+  const logout = () => {
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
+    localStorage.removeItem("user");
+    dispatch(SetToken(""));
+    navigate("/home");
+  };
+
+  const ShowModal = (item) => {
+    dispatch(showLoginModal(item));
+  };
   return (
     <>
       <div className="position-relative">

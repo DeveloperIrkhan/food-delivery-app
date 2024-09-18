@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
-import { IncrementItem, DecrementItem } from '../../app/features/AddToCart/CartSlice';
+import { IncrementItem, DecrementItem } from '../../app/features/UserCartSlice/UserCartSlice';
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
 import './cart.css'
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS';

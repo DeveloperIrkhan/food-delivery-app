@@ -19,6 +19,9 @@ export const ComparePasswordAsync = (password, existingPassword) => {
   }
 };
 
-export const createToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "2d" });
+export const createAccessToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_TOKEN_SECRET, { expiresIn: "2d" });
+};
+export const createRefreshToken = (id) => {
+  return jwt.sign({ id }, process.env.JWT_TOKEN_SECRET, { expiresIn: "2d" });
 };

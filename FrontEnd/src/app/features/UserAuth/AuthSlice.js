@@ -8,12 +8,14 @@ const initialState = {
   showLogin: false, // to control loginModal
   user: [], // User object with details like name, email, etc.
   Token: "", // JWT token for authentication
+  error: "",
 };
 
 export const authAPI = createApi({
   reducerPath: "authAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: _baseUrl,
+    credentials: "include",
   }),
 
   endpoints: (_builder) => ({
@@ -60,7 +62,6 @@ export const authSlice = createSlice({
         (state, { payload }) => {
           if (payload.success) {
             // Update the state with token and user data
-            state.Token = payload.token;
             state.user = {
               name: payload.exsistingUser.name,
               email: payload.exsistingUser.email,
@@ -68,7 +69,6 @@ export const authSlice = createSlice({
               userRole: payload.exsistingUser.userRole,
             };
             // Save token and user info in localStorage
-            localStorage.setItem("userToken", payload.token);
             localStorage.setItem("user", JSON.stringify(state.user));
           }
         }
@@ -79,7 +79,6 @@ export const authSlice = createSlice({
         (state, { payload }) => {
           if (payload.success) {
             // Update the state with token and new user data
-            state.Token = payload.token;
             state.user = {
               name: payload.user.name,
               email: payload.user.email,
@@ -87,11 +86,16 @@ export const authSlice = createSlice({
               userRole: payload.user.Role,
             };
             // Save token and user info in localStorage
-            localStorage.setItem("userToken", payload.token);
             localStorage.setItem("user", JSON.stringify(state.user));
           }
         }
-      );
+      )
+      .addMatcher(authAPI.endpoints.signIn.matchRejected, (state, action) => {
+        state.error = action.error.message || "An error occurred";
+      })
+      .addMatcher(authAPI.endpoints.signUp.matchRejected, (state, action) => {
+        state.error = action.error.message || "An error occurred";
+      });
   },
 });
 

@@ -3,23 +3,24 @@ import './cart.css'
 import { useNavigate } from 'react-router-dom'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux';
-import { cartAddedItems, getStatus, fetchingCartItemThunk } from "../../app/features/UserCartSlice/UserCartSlice"
-import { _cartItems, _totalAmount, _totalItems } from '../../app/features/AddToCart/CartSlice';
+import { cartItems, totalitems, totalamount, cartItemsFromDb, fetchingCartItemThunk, getStatus } from "../../app/features/UserCartSlice/UserCartSlice"
 const Cart = () => {
-  const cartList = useSelector(_cartItems);
-  const totalItems = useSelector(_totalItems);
-  const TotalAmount = useSelector(_totalAmount);
+  const cartList = useSelector(cartItems);
+  const totalItems = useSelector(totalitems);
+  const TotalAmount = useSelector(totalamount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   const navigate = useNavigate()
   const dispatch = useDispatch();
   const Status = useSelector(getStatus)
-  const fooditems = useSelector(cartAddedItems)
+  const fooditems = useSelector(cartItemsFromDb)
   useEffect(() => {
-    if (Status === 'idel') {
+    if (Status === 'idle') {
+      console.log("Status =", Status)
+      console.log("saved food items Ids", fooditems)
       dispatch(fetchingCartItemThunk())
     }
-    console.log(fooditems)
-  }, [fetchingCartItemThunk()]);
+    else console.log("when status is not idel", fooditems)
+  }, [Status]);
   return (
     <>
       <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>

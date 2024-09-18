@@ -6,16 +6,22 @@ const GetAllCartItemsController = async (req, resp) => {
     const user = await userModel.findOne({ _id: userId });
     if (user) {
       let cartItems = (await user.cartData) || {};
+      console.log(cartItems);
       return resp.status(200).send({
         status: "success",
         message: "all items retrieved",
         cartItems,
       });
     }
+  } catch (error) {
     return resp
       .status(200)
-      .send({ status: "false", message: "something went wrong." });
-  } catch (error) {}
+      .send({
+        error: error,
+        status: "false",
+        message: "something went wrong.",
+      });
+  }
 };
 const AddToCartController = async (req, resp) => {
   try {

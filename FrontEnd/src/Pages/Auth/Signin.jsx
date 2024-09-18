@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './Auth.css'
 import { assets } from '../../assets/assets'
+import { useNavigate } from 'react-router-dom'
 import * as Icon from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {
@@ -17,7 +18,7 @@ const Signin = () => {
   }
 
 
-
+  const navigate = useNavigate()
   const [isSignIn] = useSignInMutation();
   const [isSignUp] = useSignUpMutation();
   const isModelOpen = useSelector(_loginModal)
@@ -37,6 +38,7 @@ const Signin = () => {
         setPassword("");
         toast.success(signinResponse.message);
         hideModal(false)
+        navigate("user-cart")
       }
       else {
         toast.error(signinResponse.message)
@@ -63,6 +65,7 @@ const Signin = () => {
         setLoading(false);
         toast.success(signupResponse.message)
         hideModal(false)
+        navigate("user-cart")
       }
       else {
         toast.error(signupResponse.message)

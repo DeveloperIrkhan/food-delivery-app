@@ -10,9 +10,12 @@ import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
 import { LoggedInUser, SetToken } from './app/features/UserAuth/AuthSlice'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
+import Cookies from 'js-cookie';
 function App() {
   // const [showLogin, setShowLogin] = useState(false)
   const dispatch = useDispatch();
+  const accessToken = Cookies.get('accessToken');
+  const refreshToken = Cookies.get('refreshToken');
   const routes = createBrowserRouter(
     createRoutesFromElements(
       <>
@@ -28,8 +31,8 @@ function App() {
     const GetUserToken = () => {
       if (localStorage.getItem("user"))
         dispatch(LoggedInUser(JSON.parse(localStorage.getItem("user"))));
-      if (localStorage.getItem("userToken"))
-        dispatch(SetToken(localStorage.getItem("userToken")));
+      if (accessToken)
+        dispatch(SetToken(accessToken));
     };
     GetUserToken();
   }, []);
