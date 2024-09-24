@@ -1,37 +1,13 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { API_ENDPOINTS } from "../../../API EndPoints/API_ENDPOINTS";
-import axios from "axios";
-import Cookies from "js-cookie";
+import { createSlice } from "@reduxjs/toolkit";
+import { userCartAPI } from "../middleware/cartAPIMiddleware/userCartAPI";
 const initialState = {
   cartItems: [], // adding items into cart
   totalAmount: 0, // total amount of items
   totalItems: 0, // total number of items added to cart
   isLoading: false,
   dbCartItems: [], // user items from database
-  status: "idle", // idle | loading | success | failed
   error: null,
 };
-
-export const fetchingCartItemThunk = createAsyncThunk(
-  "cart/fetchItems",
-  async (_, { rejectWithValue }) => {
-    try {
-      const token = Cookies.get("accessToken");
-      if (!token) {
-        console.log("no token found...");
-      }
-      const response = await axios.get(API_ENDPOINTS.GET_ALL_CART_ITEMS, {
-        headers: {
-          token: `${token}`,
-        },
-      });
-      return response.data.cartItems;
-    } catch (error) {
-      return rejectWithValue(error.response?.data || "Failed to fetch items");
-    }
-  }
-);
-
 export const UserCart = createSlice({
   name: "food-cart",
   initialState,
@@ -86,21 +62,25 @@ export const UserCart = createSlice({
       state.totalItems = state.cartItems.length;
     },
   },
-  extraReducers: (_builder) => {
-    _builder.addCase(fetchingCartItemThunk.pending, (state) => {
-      state.status = "loading";
-      //console.log("status", state.status);
-    });
-    _builder.addCase(fetchingCartItemThunk.fulfilled, (state, action) => {
-      state.dbCartItems = action.payload;
-      state.status = "succeeded";
-      //console.log("status", state.status);
-    });
-    _builder.addCase(fetchingCartItemThunk.rejected, (state, action) => {
-      state.status = "failed";
-      //console.log("status", state.status);
-      state.error = action.payload;
-    });
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        userCartAPI.endpoints.getAllItems.matchFulfilled,
+        (state, action) => {
+          state.dbCartItems = action.payload;
+          state.isLoading = false;
+        }
+      )
+      .addMatcher(userCartAPI.endpoints.getAllItems.matchPending, (state) => {
+        state.isLoading = true;
+      })
+      .addMatcher(
+        userCartAPI.endpoints.getAllItems.matchRejected,
+        (state, { payload }) => {
+          state.isLoading = false;
+          state.error = payload || "error while getting cart items";
+        }
+      );
   },
 });
 

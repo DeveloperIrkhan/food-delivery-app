@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import FoodCard from './FoodCard'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-import { useGetFoodsQuery } from '../../app/features/gettingCategories and Fooditems/categorySlice'
+import { useGetFoodsQuery } from '../../app/features/categoriesSlice/categorySlice'
 const FoodItem = ({ category }) => {
     const { data: foods, isError, isLoading, error } = useGetFoodsQuery();
 

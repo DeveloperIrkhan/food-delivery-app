@@ -1,5 +1,5 @@
 import "./menu.css"
-import { _isLoading, useGetCategoriesQuery } from "../../app/features/gettingCategories and Fooditems/categorySlice"
+import { _isLoading, useGetCategoriesQuery } from "../../app/features/categoriesSlice/categorySlice"
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
 import { useEffect } from "react"

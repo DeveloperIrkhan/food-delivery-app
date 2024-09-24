@@ -7,27 +7,16 @@ import {
   cartItems,
   totalitems,
   totalamount,
-  cartItemsFromDb,
-  fetchingCartItemThunk,
-  getStatus
-} from "../../app/features/middleware/userCartMiddleware"
+} from "../../app/features/uerCartSlice/userCartSlice"
+import { useGetAllItemsQuery } from '../../app/features/middleware/cartAPIMiddleware/userCartAPI';
 const Cart = () => {
   const cartList = useSelector(cartItems);
   const totalItems = useSelector(totalitems);
   const TotalAmount = useSelector(totalamount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   const navigate = useNavigate()
-  const dispatch = useDispatch();
-  const Status = useSelector(getStatus)
-  const fooditems = useSelector(cartItemsFromDb)
-  useEffect(() => {
-    if (Status === 'idle') {
-      console.log("Status =", Status)
-      console.log("saved food items Ids", fooditems)
-      dispatch(fetchingCartItemThunk())
-    }
-    else console.log("when status is not idel", fooditems)
-  }, [Status]);
+  const { data, isLoading } = useGetAllItemsQuery();
+  console.log(data, isLoading)
   return (
     <>
       <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>

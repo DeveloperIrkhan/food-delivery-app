@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import Signin from '../../Pages/Auth/Signin';
 import Cookies from "js-cookie";
 import './Navbar.css';
-import { totalitems } from "../../app/features/middleware/userCartMiddleware"
+import { totalitems } from "../../app/features/uerCartSlice/userCartSlice"
 import {
   showLoginModal,
   LoggedInUser,

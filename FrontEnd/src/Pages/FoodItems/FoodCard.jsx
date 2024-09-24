@@ -3,7 +3,7 @@ import {
     addToCart,
     DecrementItem,
     cartItems,
-} from '../../app/features/middleware/userCartMiddleware'
+} from "../../app/features/uerCartSlice/userCartSlice"
 import { useSelector, useDispatch } from 'react-redux'
 import * as Icon from 'react-bootstrap-icons'
 import './Fooditem.css'
