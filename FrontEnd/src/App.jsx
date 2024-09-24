@@ -7,7 +7,11 @@ import Home from './Pages/Home/Home'
 import Order from './Pages/OurOrders/Order'
 import 'react-toastify/dist/ReactToastify.css';
 import GoToTopButton from './Components/ScrollingButton/GoToTopButton'
-import { LoggedInUser, SetToken } from './app/features/UserAuth/AuthSlice'
+import 'react-loading-skeleton/dist/skeleton.css'
+import {
+  LoggedInUser,
+  SetToken
+} from './app/features/middleware/Authmiddleware'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie';

@@ -12,7 +12,7 @@ const initialState = {
 };
 
 export const authAPI = createApi({
-  reducerPath: "authAPI",
+  reducerPath: "auth",
   baseQuery: fetchBaseQuery({
     baseUrl: _baseUrl,
     credentials: "include",
@@ -35,13 +35,16 @@ export const authAPI = createApi({
     }),
   }),
 });
-export const authSlice = createSlice({
+export const userAuth = createSlice({
   name: "auth",
   initialState,
   reducers: {
     // Reducer to show the login modal
     showLoginModal: (state, action) => {
+      console.log("action.payload", action.payload);
+      console.log("Dispatched payload to show modal:", action.payload);
       state.showLogin = action.payload;
+      console.log("showLogin", state.showLogin);
     },
     // Reducer to hide the login modal
     hideLoginModal: (state, action) => {
@@ -99,17 +102,12 @@ export const authSlice = createSlice({
   },
 });
 
-//exporting state varaibles
-export const _loginModal = (state) => state.auth.showLogin;
-export const _token = (state) => state.auth.Token;
-export const _user = (state) => state.auth.user;
-// Export actions for showing/hiding the login modal
-export const { showLoginModal, hideLoginModal, SetToken, LoggedInUser } =
-  authSlice.actions;
 // Export hooks for making API calls
 export const { useSignInMutation, useSignUpMutation } = authAPI;
-
-// Default export combining both the reducer and middleware
-// export default { reducer: authSlice.reducer, middleware: authAPI.middleware };
-export default authSlice.reducer;
-export const authMiddleware = authAPI.middleware;
+// Export actions for showing/hiding the login modal
+export const { showLoginModal, hideLoginModal, SetToken, LoggedInUser } =
+  userAuth.actions;
+export const _loginModal = (state) => state.userAuth.showLogin;
+export const _token = (state) => state.userAuth.Token;
+export const _user = (state) => state.userAuth.user;
+export default userAuth.reducer;

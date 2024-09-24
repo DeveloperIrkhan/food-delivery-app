@@ -41,17 +41,13 @@ const UserSignInController = async (request, res) => {
     const accessToken = createAccessToken(IsExistingUser._id);
     const refreshToken = createRefreshToken(IsExistingUser._id);
     res.cookie("accessToken", accessToken, {
-      // httpOnly: true, // Ensures the cookie is accessible only by the web server
-      secure: true, // Ensures cookies are sent only over HTTPS in production
-      // sameSite: "Strict", // Prevents cross-site request forgery
-      maxAge: 24 * 60 * 60 * 1000, // Sets cookie expiration (1 day in this case)
+      secure: true, 
+      maxAge: 24 * 60 * 60 * 1000, 
       path: "/",
     });
     res.cookie("refreshToken", refreshToken, {
-      // httpOnly: true,
       secure: true,
-      // sameSite: "Strict",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // Refresh token expiration (7 days in this case)
+      maxAge: 7 * 24 * 60 * 60 * 1000, 
       path: "/",
     });
     return res.status(200).json({

@@ -3,7 +3,14 @@ import './cart.css'
 import { useNavigate } from 'react-router-dom'
 import CartItem from './CartItem'
 import { useDispatch, useSelector } from 'react-redux';
-import { cartItems, totalitems, totalamount, cartItemsFromDb, fetchingCartItemThunk, getStatus } from "../../app/features/UserCartSlice/UserCartSlice"
+import {
+  cartItems,
+  totalitems,
+  totalamount,
+  cartItemsFromDb,
+  fetchingCartItemThunk,
+  getStatus
+} from "../../app/features/middleware/userCartMiddleware"
 const Cart = () => {
   const cartList = useSelector(cartItems);
   const totalItems = useSelector(totalitems);

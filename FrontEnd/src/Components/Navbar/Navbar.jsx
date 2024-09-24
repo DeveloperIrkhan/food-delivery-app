@@ -6,21 +6,24 @@ import { NavLink } from 'react-router-dom';
 import Signin from '../../Pages/Auth/Signin';
 import Cookies from "js-cookie";
 import './Navbar.css';
-import { totalitems } from "../../app/features/UserCartSlice/UserCartSlice"
+import { totalitems } from "../../app/features/middleware/userCartMiddleware"
 import {
-  showLoginModal, LoggedInUser,
+  showLoginModal,
+  LoggedInUser,
   _loginModal,
   _token,
   SetToken,
   _user,
-} from "../../app/features/UserAuth/AuthSlice";
+} from "../../app/features/middleware/Authmiddleware";
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINTS } from "../../API EndPoints/API_ENDPOINTS";
+// const loginmodel = useSelector(state => state.auth.showLogin)
+// const cartList = useSelector(state => state.cartSlice.cartItems);
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [image, setImage] = useState(null);
   const Quantity = useSelector(totalitems);
-  const ShowLoginScreen = useSelector(_loginModal);
+  let ShowLoginScreen = useSelector(_loginModal);
   const token = useSelector(_token);
   const userModel = useSelector(_user);
   const dispatch = useDispatch();
@@ -30,7 +33,6 @@ const Navbar = () => {
   };
   useEffect(() => {
     const userCreds = userModel;
-    console.log("user creds from first useeffect", userCreds);
     if (userCreds && userCreds.image) {
       setImage(`${API_ENDPOINTS.getImages}/${userCreds.image}`);
     } else {
@@ -43,13 +45,12 @@ const Navbar = () => {
     //     byteArray.reduce((data, byte) => data + String.fromCharCode(byte), "")
     //   );
     // }
-  }, [userModel, token]);
+  }, [userModel, token, ShowLoginScreen]);
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
     if (storedUser) {
       dispatch(LoggedInUser(storedUser));
       if (storedUser.image) {
-        console.log("user creds from second useeffect", storedUser);
         setImage(`${API_ENDPOINTS.getImages}/${storedUser.image}`);
       } else setImage(null)
     }
@@ -63,13 +64,14 @@ const Navbar = () => {
     navigate("/home");
   };
 
-  const ShowModal = (item) => {
-    dispatch(showLoginModal(item));
+  const handleSignIn = (boolValue) => {
+    dispatch(showLoginModal(boolValue));
+    console.log("ShowLoginScreen:", ShowLoginScreen);
   };
   return (
     <>
       <div className="position-relative">
-        {ShowLoginScreen ? <Signin /> : <></>}
+        {ShowLoginScreen && <Signin />}
       </div>
       <div className="container-fluid position-relative">
         <div className="navbar fixed m-0 px-3  d-flex  justify-content-between align-items-center">
@@ -97,7 +99,7 @@ const Navbar = () => {
             <div className="dot mx-3">
               {
                 !token ?
-                  <button onClick={() => ShowModal(true)} className="navbar-button">Sign In</button>
+                  <button onClick={() => handleSignIn(true)} className="navbar-button">Sign In</button>
                   : <div>
                     <span className='user-container'>
                       <img className='img-user' src={image ? image : assets.Profile} alt="" />

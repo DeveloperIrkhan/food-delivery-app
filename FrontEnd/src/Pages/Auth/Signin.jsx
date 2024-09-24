@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Auth.css'
 import { assets } from '../../assets/assets'
 import { useNavigate } from 'react-router-dom'
@@ -6,8 +6,10 @@ import * as Icon from 'react-bootstrap-icons'
 import { useDispatch, useSelector } from 'react-redux'
 import {
   hideLoginModal, _loginModal,
-  useSignInMutation, useSignUpMutation, LoggedInUser
-} from '../../app/features/UserAuth/AuthSlice'
+  LoggedInUser,
+  useSignInMutation,
+  useSignUpMutation
+} from '../../app/features/middleware/Authmiddleware'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify';
 const Signin = () => {
@@ -28,6 +30,10 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const [image, setImage] = useState("");
 
+  useEffect(() => {
+    console.log("ShowLogin Screen:", isModelOpen);
+
+  }, [isModelOpen])
   const HandleSubmitForm = async (e) => {
     setLoading(true)
     e.preventDefault();
@@ -78,7 +84,7 @@ const Signin = () => {
   return (
     <>
       {loading ? <Spinner /> : <></>}
-      {isModelOpen ? <>
+      {isModelOpen ?
         <div className="login-popup col-md-5 col-10 p-md-5 p-4">
           <form onSubmit={HandleSubmitForm} className="login-popup-container">
             <div className="login-popup-title">
@@ -165,8 +171,7 @@ const Signin = () => {
               </div>
             </div>
           </form>
-        </div></> : <></>}
-
+        </div> : <div></div>}
     </>
   )
 }

@@ -65,7 +65,7 @@ const Order = () => {
 
           </> :
           <div className='d-flex flex-column card border rounded-lg shadow-sm p-3  m-auto'>
-           <h5>your cart is empty</h5> <img src={assets.Emptycarticon} alt="" />
+            <h5>your cart is empty</h5> <img src={assets.Emptycarticon} alt="" />
           </div>
         }
 
