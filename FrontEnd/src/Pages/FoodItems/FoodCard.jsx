@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
 import {
     addToCart,
     DecrementItem,
     cartItems,
-} from "../../app/features/uerCartSlice/userCartSlice"
+} from "../../app/features/slices/userCartSlice"
 import { useSelector, useDispatch } from 'react-redux'
 import * as Icon from 'react-bootstrap-icons'
 import './Fooditem.css'

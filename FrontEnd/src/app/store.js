@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import authReducer, { authAPI } from "./features/middleware/Authmiddleware";
-import UserCart from "./features/uerCartSlice/userCartSlice";
-import { userCartAPI } from "./features/middleware/cartAPIMiddleware/userCartAPI";
-import categoryReducer, {
-  categoriesAPI,
-} from "./features/categoriesSlice/categorySlice";
+import authReducer from "./features/slices/userAuth";
+import UserCart from "./features/slices/userCartSlice";
+import { authAPI } from "./features/middleware/Authmiddleware";
+import { userCartAPI } from "./features/middleware/userCartAPI";
+import categoryReducer from "./features/slices/categorySlice";
+import { categoriesAPI } from "./features/middleware/categoriesAPI";
 export const store = configureStore({
   reducer: {
     categoryReducer,

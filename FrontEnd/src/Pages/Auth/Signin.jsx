@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import {
   hideLoginModal, _loginModal,
   LoggedInUser,
+} from '../../app/features/slices/userAuth'
+import {
   useSignInMutation,
   useSignUpMutation
 } from '../../app/features/middleware/Authmiddleware'

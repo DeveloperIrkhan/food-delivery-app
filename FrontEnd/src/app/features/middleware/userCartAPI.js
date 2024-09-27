@@ -1,9 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import Cookies from "js-cookie";
-import {
-  BASE_URL,
-  API_ENDPOINTS,
-} from "../../../../API EndPoints/API_ENDPOINTS";
+import { BASE_URL, API_ENDPOINTS } from "../../../API EndPoints/API_ENDPOINTS";
+
 export const userCartAPI = createApi({
   reducerPath: "gettingCartItemsAPI",
   baseQuery: fetchBaseQuery({
@@ -13,7 +11,7 @@ export const userCartAPI = createApi({
       if (token) {
         headers.set("token", `${token}`);
       }
-      return headers
+      return headers;
     },
   }),
 

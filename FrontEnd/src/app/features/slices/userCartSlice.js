@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { userCartAPI } from "../middleware/cartAPIMiddleware/userCartAPI";
+import { userCartAPI } from "../middleware/userCartAPI";
 const initialState = {
   cartItems: [], // adding items into cart
   totalAmount: 0, // total amount of items
@@ -84,11 +84,11 @@ export const UserCart = createSlice({
   },
 });
 
-export const { clearCart, addToCart, IncrementItem, DecrementItem } =
-  UserCart.actions;
 export const cartItemsFromDb = (state) => state.UserCart.dbCartItems;
 export const cartItems = (state) => state.UserCart.cartItems;
 export const getStatus = (state) => state.UserCart.status;
 export const totalamount = (state) => state.UserCart.totalAmount;
 export const totalitems = (state) => state.UserCart.totalItems;
+export const { clearCart, addToCart, IncrementItem, DecrementItem } =
+  UserCart.actions;
 export default UserCart.reducer;

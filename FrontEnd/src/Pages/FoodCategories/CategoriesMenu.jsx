@@ -1,9 +1,8 @@
+import { useEffect } from "react"
 import "./menu.css"
-import { _isLoading, useGetCategoriesQuery } from "../../app/features/categoriesSlice/categorySlice"
+import { useGetCategoriesQuery } from "../../app/features/middleware/categoriesAPI"
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
-import { useEffect } from "react"
-import { useSelector } from "react-redux"
 const CategoriesMenu = ({ category, setCategory }) => {
     const { data: categories, isLoading } = useGetCategoriesQuery();
     // let isLoading = useSelector(_isLoading)

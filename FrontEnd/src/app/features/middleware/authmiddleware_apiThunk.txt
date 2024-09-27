@@ -12,21 +12,25 @@ const initialState = {
   error: null,
 };
 
-export const fetchingCartItems = createApi({
-  reducerPath: "",
-  baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:4000/api",
-  }),
-
-  endpoints: (builder) => ({
-    getAllItems: builder.query({
-      query: () => ({
-        url: "/cart/GetAllCartItems",
-        method: "GET",
-      }),
-    }),
-  }),
-});
+export const fetchingCartItemThunk = createAsyncThunk(
+  "cart/fetchItems",
+  async (_, { rejectWithValue }) => {
+    try {
+      const token = Cookies.get("accessToken");
+      if (!token) {
+        console.log("no token found...");
+      }
+      const response = await axios.get(API_ENDPOINTS.GET_ALL_CART_ITEMS, {
+        headers: {
+          token: `${token}`,
+        },
+      });
+      return response.data.cartItems;
+    } catch (error) {
+      return rejectWithValue(error.response?.data || "Failed to fetch items");
+    }
+  }
+);
 
 export const UserCart = createSlice({
   name: "food-cart",

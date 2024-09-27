@@ -11,7 +11,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import {
   LoggedInUser,
   SetToken
-} from './app/features/middleware/Authmiddleware'
+} from './app/features/slices/userAuth'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie';

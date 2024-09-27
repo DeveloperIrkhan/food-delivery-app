@@ -1,22 +1,21 @@
-import React, { useEffect } from 'react'
 import './cart.css'
 import { useNavigate } from 'react-router-dom'
 import CartItem from './CartItem'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   cartItems,
   totalitems,
   totalamount,
-} from "../../app/features/uerCartSlice/userCartSlice"
-import { useGetAllItemsQuery } from '../../app/features/middleware/cartAPIMiddleware/userCartAPI';
+} from "../../app/features/slices/userCartSlice"
+import { useGetAllItemsQuery } from '../../app/features/middleware/userCartAPI';
 const Cart = () => {
   const cartList = useSelector(cartItems);
   const totalItems = useSelector(totalitems);
   const TotalAmount = useSelector(totalamount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   const navigate = useNavigate()
-  const { data, isLoading } = useGetAllItemsQuery();
-  console.log(data, isLoading)
+  const { data: items, isLoading } = useGetAllItemsQuery();
+  console.log(items.cartItems)
   return (
     <>
       <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>

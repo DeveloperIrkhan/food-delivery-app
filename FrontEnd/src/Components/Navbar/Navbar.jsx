@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 import Signin from '../../Pages/Auth/Signin';
 import Cookies from "js-cookie";
 import './Navbar.css';
-import { totalitems } from "../../app/features/uerCartSlice/userCartSlice"
+import { totalitems } from "../../app/features/slices/userCartSlice"
 import {
   showLoginModal,
   LoggedInUser,
@@ -14,7 +14,7 @@ import {
   _token,
   SetToken,
   _user,
-} from "../../app/features/middleware/Authmiddleware";
+} from "../../app/features/slices/userAuth"
 import { useNavigate } from "react-router-dom";
 import { API_ENDPOINTS } from "../../API EndPoints/API_ENDPOINTS";
 // const loginmodel = useSelector(state => state.auth.showLogin)
