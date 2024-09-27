@@ -8,6 +8,7 @@ import {
   totalamount,
 } from "../../app/features/slices/userCartSlice"
 import { useGetAllItemsQuery } from '../../app/features/middleware/userCartAPI';
+import Spinner from '../../Components/Spinner/Spinner';
 const Cart = () => {
   const cartList = useSelector(cartItems);
   const totalItems = useSelector(totalitems);
@@ -15,9 +16,10 @@ const Cart = () => {
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   const navigate = useNavigate()
   const { data: items, isLoading } = useGetAllItemsQuery();
-  console.log(items.cartItems)
+  if (!isLoading) { console.log("items", items) }
   return (
     <>
+      {isLoading ? <Spinner /> : <></>}
       <section className="container bg-white py-5 antialiased" style={{ marginTop: "10vmin" }}>
         <div className="container mx-auto px-4">
           <h2 className="h2 text-xl fw-semibold text-dark sm:text-2xl">Shopping Cart</h2>
@@ -52,7 +54,12 @@ const Cart = () => {
                           <dd className="">Rs/- {deliveryFee}</dd>
                         </dl>
 
-                      </> : <p className='text-danger p-3'>your cart is empty</p>}
+                      </> :
+                      <p className='row  p-3'>
+                        <span className="alert alert-danger">
+                          your cart is empty
+                        </span>
+                      </p>}
                     <dl className="d-flex justify-content-between border-top pt-2">
                       <dt className="h5 fw-bold">Total</dt>
                       <dd className="h5 fw-bold">Rs/- {TotalAmount + deliveryFee}</dd>
