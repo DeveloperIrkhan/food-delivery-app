@@ -22,7 +22,24 @@ export const userCartAPI = createApi({
         method: "GET",
       }),
     }),
+    addToCart: builder.mutation({
+      query: (cartitem) => ({
+        url: `${API_ENDPOINTS.CART_ADD_ITEM}`,
+        method: "POST",
+        body: { itemId: cartitem._id },
+      }),
+    }),
+    removeFromCart: builder.mutation({
+      query: (cartitem) => ({
+        url: `${API_ENDPOINTS.CART_REMOVE_ITEM}`,
+        method: "DELETE",
+        body: { itemId: cartitem._id },
+      }),
+    }),
   }),
 });
-
-export const { useGetAllItemsQuery } = userCartAPI;
+export const {
+  useGetAllItemsQuery,
+  useAddToCartMutation,
+  useRemoveFromCartMutation,
+} = userCartAPI;

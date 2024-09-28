@@ -67,7 +67,8 @@ export const UserCart = createSlice({
       .addMatcher(
         userCartAPI.endpoints.getAllItems.matchFulfilled,
         (state, action) => {
-          state.dbCartItems = action.payload;
+          state.cartItems = action.payload.cartItems;
+          console.log("data from db",state.cartItems);
           state.isLoading = false;
         }
       )

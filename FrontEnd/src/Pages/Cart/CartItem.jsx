@@ -4,13 +4,33 @@ import { IncrementItem, DecrementItem } from '../../app/features/slices/userCart
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
 import './cart.css'
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS';
+import { useAddToCartMutation, useRemoveFromCartMutation } from '../../app/features/middleware/userCartAPI';
 const CartItem = ({ cartitems }) => {
+    const [apiAddToCall] = useAddToCartMutation();
+    const [removeCartItem] = useRemoveFromCartMutation();
+
+
+
     const dispatch = useDispatch();
     const AddToCartitem = (cartitems) => {
         dispatch(IncrementItem(cartitems))
+        apiAddToCall(cartitems)
+            .then(() => {
+                console.log("item added successfully")
+            })
+            .catch((error) => {
+                console.log(`error while adding item into database ${error}`)
+            })
     }
     const removefromCartitem = (cartitems) => {
         dispatch(DecrementItem(cartitems))
+        removeCartItem(cartitems)
+            .then(() => {
+                console.log("item remove successfully")
+            })
+            .catch((error) => {
+                console.log(`error while removing item ${error}`)
+            })
     }
 
     return (

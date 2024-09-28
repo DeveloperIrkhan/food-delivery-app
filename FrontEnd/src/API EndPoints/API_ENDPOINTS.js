@@ -6,8 +6,8 @@ export const API_ENDPOINTS = {
   getAllFoodItems: `${BASE_URL}/food/getAllFood`,
   userAuth: `${BASE_URL}/userauth`,
   GET_ALL_CART_ITEMS: "/cart/GetAllCartItems",
-  CART_ADD_ITEM: `${BASE_URL}/cart/addCartItems`,
-  CART_REMOVE_ITEM: `${BASE_URL}/cart/removeCartItems`,
+  CART_ADD_ITEM: "/cart/AddtoCart",
+  CART_REMOVE_ITEM: "/cart/RemoveFromCart",
   getImages: `${IMGAGE_BASE_URL}/images`,
 };
 

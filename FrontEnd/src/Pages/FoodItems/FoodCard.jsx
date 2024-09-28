@@ -9,16 +9,33 @@ import './Fooditem.css'
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
 import Roundedbtn from '../../Components/buttons/Roundedbtn'
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS'
+import { useAddToCartMutation, useRemoveFromCartMutation } from "../../app/features/middleware/userCartAPI"
 const FoodCard = ({ item }) => {
     const dispatch = useDispatch();
+    const [apiAddToCall] = useAddToCartMutation();
+    const [removeCartItem] = useRemoveFromCartMutation();
     const cartitem = useSelector(cartItems) || [];
     // Assuming item has a unique `id`
     const existingItem = cartitem.some(cartItem => cartItem._id === item._id);
     const AddCart = (item) => {
         dispatch(addToCart(item))
+        apiAddToCall(item)
+            .then(() => {
+                console.log("item added successfully")
+            })
+            .catch((error) => {
+                console.log(`error while adding item into database ${error}`)
+            })
     }
     const RemoveFromCart = (item) => {
         dispatch(DecrementItem(item))
+        removeCartItem(item)
+            .then(() => {
+                console.log("item remove successfully")
+            })
+            .catch((error) => {
+                console.log(`error while removing item ${error}`)
+            })
     };
     return (
         <>
