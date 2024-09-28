@@ -15,8 +15,8 @@ const Cart = () => {
   const TotalAmount = useSelector(totalamount);
   const deliveryFee = TotalAmount > 0 ? 150 : 0;
   const navigate = useNavigate()
-  const { data: items, isLoading } = useGetAllItemsQuery();
-  if (!isLoading) { console.log("items", items) }
+  const { data: cartItemsDetails, isLoading } = useGetAllItemsQuery();
+  if (!isLoading) { console.log("items", cartItemsDetails) }
   return (
     <>
       {isLoading ? <Spinner /> : <></>}

@@ -5,7 +5,6 @@ const initialState = {
   totalAmount: 0, // total amount of items
   totalItems: 0, // total number of items added to cart
   isLoading: false,
-  dbCartItems: [], // user items from database
   error: null,
 };
 export const UserCart = createSlice({
@@ -67,8 +66,14 @@ export const UserCart = createSlice({
       .addMatcher(
         userCartAPI.endpoints.getAllItems.matchFulfilled,
         (state, action) => {
-          state.cartItems = action.payload.cartItems;
-          console.log("data from db",state.cartItems);
+          state.cartItems = action.payload.cartItemsDetails;
+          console.log("data from db", state.cartItems);
+          state.cartItems.forEach((item) => {
+            state.totalAmount += Number(item.price * item.OrderQuantity);
+          });
+          console.log("state.totalAmount", state.totalAmount);
+          state.totalItems = state.cartItems.length;
+          console.log("state.totalItems", state.totalItems);
           state.isLoading = false;
         }
       )
@@ -85,7 +90,6 @@ export const UserCart = createSlice({
   },
 });
 
-export const cartItemsFromDb = (state) => state.UserCart.dbCartItems;
 export const cartItems = (state) => state.UserCart.cartItems;
 export const getStatus = (state) => state.UserCart.status;
 export const totalamount = (state) => state.UserCart.totalAmount;

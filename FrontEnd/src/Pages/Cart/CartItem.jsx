@@ -8,9 +8,6 @@ import { useAddToCartMutation, useRemoveFromCartMutation } from '../../app/featu
 const CartItem = ({ cartitems }) => {
     const [apiAddToCall] = useAddToCartMutation();
     const [removeCartItem] = useRemoveFromCartMutation();
-
-
-
     const dispatch = useDispatch();
     const AddToCartitem = (cartitems) => {
         dispatch(IncrementItem(cartitems))
