@@ -67,13 +67,10 @@ export const UserCart = createSlice({
         userCartAPI.endpoints.getAllItems.matchFulfilled,
         (state, action) => {
           state.cartItems = action.payload.cartItemsDetails;
-          console.log("data from db", state.cartItems);
           state.cartItems.forEach((item) => {
             state.totalAmount += Number(item.price * item.OrderQuantity);
           });
-          console.log("state.totalAmount", state.totalAmount);
           state.totalItems = state.cartItems.length;
-          console.log("state.totalItems", state.totalItems);
           state.isLoading = false;
         }
       )
