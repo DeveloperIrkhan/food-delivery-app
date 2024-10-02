@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { IncrementItem, DecrementItem } from '../../app/features/slices/userCartSlice';
 import ImageLoadingSpinner from '../../Components/Spinner/ImageLoadingSpinner'
 import './cart.css'
+import { toast } from 'react-toastify';
 import { API_ENDPOINTS } from '../../API EndPoints/API_ENDPOINTS';
 import { useAddToCartMutation, useRemoveFromCartMutation } from '../../app/features/middleware/userCartAPI';
 const CartItem = ({ cartitems }) => {
@@ -13,20 +14,20 @@ const CartItem = ({ cartitems }) => {
         dispatch(IncrementItem(cartitems))
         apiAddToCall(cartitems)
             .then(() => {
-                console.log("item added successfully")
+                toast.success("item added successfully")
             })
             .catch((error) => {
-                console.log(`error while adding item into database ${error}`)
+                toast.error(`error while adding item into database ${error}`)
             })
     }
     const removefromCartitem = (cartitems) => {
         dispatch(DecrementItem(cartitems))
         removeCartItem(cartitems)
             .then(() => {
-                console.log("item remove successfully")
+                toast.info("item remove successfully")
             })
             .catch((error) => {
-                console.log(`error while removing item ${error}`)
+                toast.error(`error while removing item ${error}`)
             })
     }
 
@@ -42,7 +43,7 @@ const CartItem = ({ cartitems }) => {
                         <div className="card-body">
                             <div className="d-flex flex-md-column flex-row align-items-end">
                                 <h5 className="card-text mt-md-0 mt-3">{cartitems.name}</h5>
-                                <p className="card-text mx-md-0 mb-md-0 mx-3 mb-2">Item Price: Rs/- {cartitems.price}</p>
+                                <p className="card-text mx-md-0 mb-md-0 mx-3 mb-2">Item Price: AED {cartitems.price}</p>
                             </div>
                             <div className="mt-auto align-self-end" style={{ position: "absolute", bottom: "20px", right: "10px" }}>
                                 <div className="mt-auto col-md-auto order-md-3 d-flex justify-content-end align-items-center">

@@ -61,7 +61,7 @@ const FoodCard = ({ item }) => {
                                 <Icon.StarHalf className='blackcolor' />
                                 <Icon.Star className='blackcolor' />
                             </div>
-                            <div className='food-item-price d-flex align-items-center'>Rs/- {item.price}</div>
+                            <div className='food-item-price d-flex align-items-center'>AED {item.price}</div>
                         </div>
                         <div className='d-flex justify-content-end mt-3 align-items-center'>
                             <Roundedbtn onclickFun={existingItem ? () => RemoveFromCart(item) : () => AddCart(item)} cssClass={"btn cart-button"} text={existingItem ? "Remove" : "Order"} />

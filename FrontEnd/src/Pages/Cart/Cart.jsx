@@ -1,5 +1,6 @@
 import './cart.css'
 import { useNavigate } from 'react-router-dom'
+import Roundedbtn from '../../Components/buttons/Roundedbtn'
 import CartItem from './CartItem'
 import { useSelector } from 'react-redux';
 import {
@@ -13,7 +14,7 @@ const Cart = () => {
   const cartList = useSelector(cartItems);
   const totalItems = useSelector(totalitems);
   const TotalAmount = useSelector(totalamount);
-  const deliveryFee = TotalAmount > 0 ? 150 : 0;
+  const deliveryFee = TotalAmount > 0 ? 10 : 0;
   const navigate = useNavigate()
   const { data: cartItemsDetails, isLoading } = useGetAllItemsQuery();
   if (!isLoading) { console.log("items", cartItemsDetails) }
@@ -44,14 +45,14 @@ const Cart = () => {
                     {cartList.map((item) => (
                       <dl key={item._id} className="d-flex justify-content-between pt-2">
                         <dt className="">{item.name} x{item.OrderQuantity}</dt>
-                        <dd className="">Rs/- {item.OrderQuantity * item.price} </dd>
+                        <dd className="">AED {item.OrderQuantity * item.price} </dd>
                       </dl>
                     ))}
                     {deliveryFee != 0 ?
                       <>
                         <dl className="d-flex justify-content-between pt-3 border-top">
                           <dt className="">Delivery Fee</dt>
-                          <dd className="">Rs/- {deliveryFee}</dd>
+                          <dd className="">AED {deliveryFee}</dd>
                         </dl>
 
                       </> :
@@ -62,15 +63,15 @@ const Cart = () => {
                       </p>}
                     <dl className="d-flex justify-content-between border-top pt-2">
                       <dt className="h5 fw-bold">Total</dt>
-                      <dd className="h5 fw-bold">Rs/- {TotalAmount + deliveryFee}</dd>
+                      <dd className="h5 fw-bold">AED {TotalAmount + deliveryFee}</dd>
                     </dl>
                   </div>
                   <div className="d-flex justify-content-center mt-3">
-                    <button onClick={() => navigate('/user-orders')} className="button-primary">Proceed To Checkout</button>
+                    <Roundedbtn cssClass={"btn cart-button"} text='Proceed to Checkout' onclickFun={() => navigate('/user-orders')} />
                   </div>
                   <div className="d-flex justify-content-center mt-3 top-border">
-                    <input className='form-control' placeholder='Promo Code here' />
-                    <button className='btn btn-dark'>Submit</button>
+                    <input className='form-control rounded-0 rounded-start-5' placeholder='Promo Code here' />
+                    <button className='btn rounded-0 rounded-end-5 btn-primary'>Submit</button>
                   </div>
                 </div>
               </div>

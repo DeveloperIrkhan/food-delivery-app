@@ -9,6 +9,7 @@ export const API_ENDPOINTS = {
   CART_ADD_ITEM: "/cart/AddtoCart",
   CART_REMOVE_ITEM: "/cart/RemoveFromCart",
   getImages: `${IMGAGE_BASE_URL}/images`,
+  placeOrder: "/order/placeorder"
 };
 
 //   getProductDetails: (productId) => `${BASE_URL}/products/${productId}`,

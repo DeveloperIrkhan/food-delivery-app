@@ -6,6 +6,7 @@ import userRoutes from "./routes/UserRoute.js";
 import categoryRoutes from "./routes/categoryRoute.js";
 import { ConnectionDb } from "./config/Database.js";
 import cartRoute from "./routes/cartRoute.js";
+import { orderRoute } from "./routes/orderRoute.js";
 
 // app configuration
 const app = express();
@@ -26,9 +27,12 @@ app.use("/api/cart", cartRoute);
 app.use("/api/food", foodRouter);
 app.use("/api/userauth", userRoutes);
 app.use("/images", express.static("uploads"));
-app.get("/", (req, resp) => {
+app.get("/", (resp) => {
   resp.send("API is working");
 });
+
+app.use("/api/order", orderRoute);
+// http://localhost:4000/api/order/placeorder
 
 app.listen(port, () => {
   console.log(`app is runing on http://localhost:${port} no`);
