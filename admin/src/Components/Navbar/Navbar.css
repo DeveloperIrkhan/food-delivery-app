@@ -11,4 +11,103 @@
 .navbar{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
+.active-link {
+  background-color: var(--second-color);
+  border-radius: 17px;
+  color: var(--first-color);
+}
+.navbar-button {
+  background-color: transparent;
+  border: 1px solid var(--second-color);
+  padding: 7px 16px;
+  font-size: var(--normal-fonts);
+  border-radius: 50px;
+  color: var(--second-color);
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.navbar-button:hover {
+  background-color: var(--second-color);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  color: white;
+}
+.cart-container {
+  position: relative;
+
+}
+.carts-container {
+  position: relative;
+}
+.cart-quantity {
+  position: absolute;
+  background: var(--second-color);
+  width: 20px;
+  color: white;
+  font-size: 10px;
+  height: 20px;
+  padding: 0.5vmin;
+  border-radius: 50%;
+  top: -5px;
+  right: -20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.navbar-menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-menu.open {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 10px 17px 29px 0px;
+  margin-left: 10%;
+}
+.user-container {
+  display: inline-block;
+  transition: all .5s;
+  z-index: 1;
+  padding: 3px;
+}
+
+.img-user {
+  height: 35px;
+  width: 35px;
+  cursor: pointer;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+.dropdownmenu {
+  display: none;
+  position: absolute;
+  top: 40px;
+  transition: all .5s;
+  right: 0;
+  /* left: 15px; */
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-radius: 10px;
+  width: 20vmin;
+  z-index: 3;
+  background-color: white;
+}
+.dropdownmenu ul {
+  padding: 5px;
+  margin: 0;
+}
+.dropdownmenu ul li {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+  cursor: pointer;
+}
+.dropdownmenu ul li:hover{
+  background-color: #f3edeb;
+}
  
+.user-container:hover .dropdownmenu {
+  display: block;
+}

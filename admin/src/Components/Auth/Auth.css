@@ -1,0 +1,55 @@
+.main-container{
+height: 100vh;
+display: flex;
+
+}
+.login-popup {
+  margin: auto;
+  border-radius: 10px;
+  box-shadow: rgba(100, 100, 111, 0.2) 1px 1px 12px 0px;
+  background-color: #f8f4f4;
+  border: 1px solid #d0cccc;
+  animation: FadeIn 1.3s;
+}
+.upload-selfie-image {
+  margin: 10px 50px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
+  border: 2px solid #dddada;
+}
+.uploadimg-selfie {
+  border-radius: 100%;
+  padding: 1vmin;
+  margin: 10px 10px;
+  border: 2px solid #dddada;
+}
+.cross-button {
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.cross-button {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+}
+.auth-link {
+  cursor: pointer;
+  color: rgb(193, 72, 72);
+  font-weight: 500;
+  margin-left: 10px;
+  padding-bottom: 3px;
+  border-bottom: 2px solid rgb(193, 72, 72);
+}
+
+@keyframes FadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

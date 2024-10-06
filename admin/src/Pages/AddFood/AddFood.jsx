@@ -5,7 +5,6 @@ import { toast } from 'react-toastify'
 import { assets } from '../../assets/assets'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import { getAllCategories } from '../../app/Features/CategortySlice'
 const AddFood = () => {
   const [loading, setLoading] = useState(false)
   const [name, setName] = useState("");
@@ -14,7 +13,6 @@ const AddFood = () => {
   const [image, setImage] = useState(false);
   const [category, setCategory] = useState("");
   const [categories, setCategories] = useState([]);
-  const categoriesList = useSelector(state => state.CategorySlice.getAllCategories);
   const fetchCategories = async () => {
     try {
       setLoading(true)

@@ -20,6 +20,9 @@ a {
   background: inherit;
   text-decoration: none;
 }
+.borrdered{
+  border: 1px solid red;
+}
 hr {
   border: none;
   height: 1px;
@@ -36,11 +39,11 @@ hr {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 .heading-text {
-  color: var(--hover-color);
-  border-bottom: 2px solid var(--hover-color);
+  color: var(--first-color);
+  border-bottom: 2px solid var(--first-color);
   letter-spacing: 1px;
   font-weight: 500;
-  font-size: 5vmin;
+  font-size: 4vmin;
   padding: 3px 0;
   margin: 7px;
   cursor: none;

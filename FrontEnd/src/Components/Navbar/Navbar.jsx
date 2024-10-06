@@ -115,10 +115,6 @@ const Navbar = () => {
               }
             </div>
           </div>
-
-
-
-          {/* Hamburger Menu Button */}
           <div className="d-lg-none d-block hamb urger-menu" onClick={toggleMenu}>
             {
               menuOpen ? <span><Icon.XLg /></span> :

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { useGetAllFoodQuery, useRemoveFoodMutation } from '../../app/Features/apiSlice'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify';
 import * as Icon from 'react-bootstrap-icons'

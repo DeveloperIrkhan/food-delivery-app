@@ -1,13 +1,18 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from "@reduxjs/toolkit/query";
-import { FoodZ_API_For_admin } from "./Features/apiSlice";
-import CategorySlice from "./Features/CategortySlice";
+import { FoodAPI } from "./Features/middlewares/FoodsAPI";
+import { AuthAPI } from "./Features/middlewares/AuthAPI";
+import CategorySlice from "./Features/Slices/FoodsSlice";
+import authSlice from "./Features/Slices/AuthSlice";
 export const store = configureStore({
   reducer: {
-    CategorySlice,
-    [FoodZ_API_For_admin.reducerPath]: FoodZ_API_For_admin.reducer,
+    category: CategorySlice,
+    auth: authSlice,
+    [FoodAPI.reducerPath]: FoodAPI.reducer,
+    [AuthAPI.reducerPath]: AuthAPI.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(FoodZ_API_For_admin.middleware),
+    getDefaultMiddleware({ serializableCheck: false })
+      .concat(FoodAPI.middleware)
+      .concat(AuthAPI.middleware),
 });
