@@ -76,8 +76,8 @@ const Navbar = () => {
       <div className="container-fluid position-relative">
         <div className="navbar fixed m-0 px-3  d-flex  justify-content-between align-items-center">
           <div className=''>
-            <img className="full-logo" src={assets.FullLogo} alt="Logo" />
-            <img className="small-logo" src={assets.miniLogo} alt="Logo" />
+            <img onClick={() => navigate("/home")} className="full-logo" src={assets.FullLogo} alt="Logo" />
+            <img onClick={() => navigate("/home")} className="small-logo" src={assets.miniLogo} alt="Logo" />
           </div>
 
           <div className={`navbar-menu ${menuOpen ? 'open' : ''}`}>

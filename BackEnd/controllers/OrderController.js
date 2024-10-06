@@ -25,7 +25,7 @@ const PlaceOrderController = async (req, res) => {
           product_data: {
             name: item.name,
           },
-          unit_amount: item.price * 100 * 3.4,
+          unit_amount: item.price * 100 * 3, //for rounding the total amount i used 3 instead of 3.67
         },
         quantity: 1,
       }));
@@ -35,7 +35,7 @@ const PlaceOrderController = async (req, res) => {
           product_data: {
             name: "Delivery Charges",
           },
-          unit_amount: 2 * 100 * 3.4,
+          unit_amount: 2 * 100 * 3, //for rounding the total amount i used 3 instead of 3.67
         },
         quantity: 1,
       });
@@ -43,8 +43,10 @@ const PlaceOrderController = async (req, res) => {
       const session = await stripeKey.checkout.sessions.create({
         line_items: line_items,
         mode: "payment",
-        success_url: `${frontendUrl}verify?success=true&OrderId=${newOrder._id}`,
-        cancel_url: `${frontendUrl}verify?success=false&OrderId=${newOrder._id}`,
+        // success_url: `${frontendUrl}verify?success=true&OrderId=${newOrder._id}`,
+        // cancel_url: `${frontendUrl}verify?success=false&OrderId=${newOrder._id}`,
+        success_url: `${frontendUrl}user-orders`,
+        cancel_url: `${frontendUrl}user-orders`,
       });
       return res.status(200).json({
         success: true,
