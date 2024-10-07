@@ -17,7 +17,7 @@ export const FoodAPI = createApi({
     InsertNewFood: builder.mutation({
       query: (newFood) => ({
         url: "/add",
-        method: "POSR",
+        method: "POST",
         body: newFood,
       }),
     }),

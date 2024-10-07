@@ -2,21 +2,19 @@ import React, { useEffect } from 'react'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify';
 import * as Icon from 'react-bootstrap-icons'
+import { useGetAllFoodQuery, useRemoveFoodMutation } from '../../app/Features/middlewares/FoodsAPI';
 const ListFoods = () => {
 
   const { data, error, isLoading, refetch } = useGetAllFoodQuery();
   const [removeFood] = useRemoveFoodMutation();
   if (isLoading) return (<div><Spinner /> </div>)
-  console.log(data.foods)
   const deleteEntry = async (id) => {
     try {
       if (isLoading) return (<div><Spinner /> </div>)
-      console.log("Deleting food with id:", id);
       await removeFood(id)
       toast.success(`record is deleted successfully`);
       refetch()
     } catch (error) {
-      console.error("Failed to delete food", error);
       toast.error(`Error while deleting record`);
     }
   }

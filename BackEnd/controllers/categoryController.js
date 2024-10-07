@@ -6,18 +6,18 @@ const AddCategoryController = async (req, resp) => {
     const { name, description } = req.body;
     if (!req.file || !req.file.filename) {
       return resp
-        .status(501)
+        .status(500)
         .send({ success: false, message: "please upload image" });
     }
     const ImageFile = req.file.filename;
     if (!name) {
       return resp
-        .status(501)
+        .status(500)
         .send({ success: false, message: "please enter name" });
     }
     if (!description) {
       return resp
-        .status(501)
+        .status(500)
         .send({ success: false, message: "please enter description" });
     }
     const existingCategory = await categoryModel.findOne({ name });
@@ -36,7 +36,7 @@ const AddCategoryController = async (req, resp) => {
 
     await createNewCategory.save();
     return resp.status(200).send({
-      status: true,
+      success: true,
       message: "category created successfully",
       data: createNewCategory,
     });
@@ -84,7 +84,7 @@ const GetAllCategoriesController = async (request, response) => {
         categories,
       });
     }
-    return response.json({success:false, message: "no category found"})
+    return response.json({ success: false, message: "no category found" });
   } catch (error) {
     console.log(error);
     return response.status(400).send({

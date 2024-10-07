@@ -3,59 +3,49 @@ import Spinner from "../../Components/Spinner/Spinner";
 import HeadingTitle from '../../Components/HeadingTitle'
 import { toast } from 'react-toastify'
 import { assets } from '../../assets/assets'
-import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useGetAllCategoriesQuery } from "../../app/Features/middlewares/CategoryAPI";
+import { useInsertNewFoodMutation } from "../../app/Features/middlewares/FoodsAPI";
 const AddFood = () => {
-  const [loading, setLoading] = useState(false)
   const [name, setName] = useState("");
+  const [Loading, setLoading] = useState(false)
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [image, setImage] = useState(false);
+  const [image, setImage] = useState("");
   const [category, setCategory] = useState("");
-  const [categories, setCategories] = useState([]);
-  const fetchCategories = async () => {
+  // const [categories, setCategories] = useState([]);
+  const { data: categories, isLoading, error } = useGetAllCategoriesQuery();
+  const [isNewFood] = useInsertNewFoodMutation()
+  const submitForm = async (e) => {
+    e.preventDefault();
     try {
       setLoading(true)
-      const categoriesResp = await axios.get("http://localhost:4000/api/category/get-all-categories")
-      if (categoriesResp.data.success) {
-        setLoading(false)
-        setCategories(categoriesResp.data.categories)
-      }
-    } catch (error) {
-      toast.error(categoriesResp.data.message)
-    }
-  }
-  useEffect(() => {
-    fetchCategories();
-  }, []);
-  const submitForm = async () => {
-    try {
-      setLoading(true)
-      const data = new FormData();
-      data.append("name", name)
-      data.append("description", description)
-      data.append("price", Number(price))
-      data.append("image", image)
-      data.append("category", category)
-      const response = await axios.post("http://localhost:4000/api/food/add", data)
+      const newFood = new FormData();
+      newFood.append("name", name)
+      newFood.append("description", description)
+      newFood.append("price", Number(price))
+      newFood.append("image", image)
+      newFood.append("category", category)
+      const response = await isNewFood(newFood);
+      setImage("")
+      setName("")
+      setDescription("")
+      setPrice("")
       if (response.data.success) {
         toast.success(response.data.message)
       }
       else {
-        toast.error(response.data.message)
+        toast.success(response.data.message)
       }
-      setImage(false)
-      setLoading(false)
-      setName("")
-      setDescription("")
-      setPrice("")
+
     } catch (error) {
+      toast.error(error)
+      console.log("Got error while inserting new Food", error)
+    }
+    finally {
       setLoading(false)
-      toast.error(error.message)
-      console.log("Got error while inserting new Food", error.message)
     }
   }
-  if (loading) {
+  if (isLoading || Loading) {
     return (<div>
       <Spinner />
     </div>)
@@ -99,7 +89,7 @@ const AddFood = () => {
                 name='description'
                 placeholder='write conent here' />
             </div>
-            <div className="add-category-price">
+            {!isLoading && <div className="add-category-price">
               <div className="add-category flex-col mt-3">
                 <label className='form-label'>Product category</label>
                 <select
@@ -107,7 +97,7 @@ const AddFood = () => {
                   onChange={(e) => { setCategory(e.target.value) }}
                   className='form-control'
                   id="">
-                  {categories.map((item) => {
+                  {categories?.categories.map((item) => {
                     return (
                       <option key={item._id} value={item._id}>
                         {item.name}
@@ -116,7 +106,7 @@ const AddFood = () => {
                   })}
                 </select>
               </div>
-            </div>
+            </div>}
             <div className="add-price flex-col mt-3">
               <label
                 className='form-label'>Product Price</label>

@@ -1,39 +1,46 @@
 import React, { useState } from 'react'
 import HeadingTitle from '../../Components/HeadingTitle'
 import { assets } from '../../assets/assets'
-import axios from 'axios'
 import Spinner from '../../Components/Spinner/Spinner'
 import { toast } from 'react-toastify'
+import { useInsertCategoryMutation } from '../../app/Features/middlewares/CategoryAPI'
 const AddCategory = () => {
-    const categoryurl = "http://localhost:4000/api/category/add";
     const [name, setName] = useState("");
+    const [InsertCategory, { isLoading }] = useInsertCategoryMutation();
     const [description, setDescription] = useState("");
-    const [price, setPrice] = useState("");
-    const [image, setImage] = useState(false);
+    const [image, setImage] = useState("");
     const [loading, setLoading] = useState(false);
     const submitForm = async (e) => {
         e.preventDefault();
         try {
+            console.log("image", image)
             setLoading(true)
-            const data = new FormData();
-            data.append("name", name)
-            data.append("description", description)
-            data.append("price", Number(price))
-            data.append("image", image)
-            const response = await axios.post(categoryurl, data)
-            toast.success(response.data.message)
-            setImage(false)
-            setLoading(false)
-            setName("")
-            setDescription("")
-            setPrice("")
+            const newCategory = new FormData();
+            newCategory.append("name", name)
+            newCategory.append("description", description)
+            newCategory.append("image", image)
+            const response = await InsertCategory(newCategory);
+            if (response.data.success) {
+                toast.success(response.data.message)
+                setLoading(false)
+                setName("")
+                setImage("")
+                setDescription("")
+            }
+            else {
+                setLoading(false)
+                toast.error(response.data.message)
+            }
 
         } catch (error) {
-            console.log("Got error while inserting new Food", error)
+            console.log("Got error while inserting new Category", error)
+        }
+        finally {
+            setLoading(false)
         }
 
     }
-    if (loading) {
+    if (loading || isLoading) {
         return (<div>
             <Spinner />
         </div>)
@@ -76,16 +83,6 @@ const AddCategory = () => {
                                 type="text"
                                 name='description'
                                 placeholder='write conent here' />
-                        </div>
-
-                        <div className="add-price flex-col">
-                            <label
-                                className='form-label'>Product Price</label>
-                            <input className='form-control'
-                                onChange={(e) => { setPrice(e.target.value) }}
-                                value={price} type="text"
-                                name='price'
-                                placeholder='$20' />
                         </div>
                         <div className="button-area">
                             <button className="my-3 btn btn-success" type='submit'>Add Food</button>

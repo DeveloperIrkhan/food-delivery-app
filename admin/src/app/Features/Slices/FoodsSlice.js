@@ -4,8 +4,8 @@ const initialState = {
   categoriesItems: [],
   error: "",
 };
-const CategorySlice = createSlice({
-  name: "category-slice",
+const FoodSlice = createSlice({
+  name: "food-slice",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -22,4 +22,4 @@ const CategorySlice = createSlice({
   },
 });
 
-export default CategorySlice.reducer;
+export default FoodSlice.reducer;
