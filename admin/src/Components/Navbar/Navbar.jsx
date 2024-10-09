@@ -37,7 +37,7 @@ const Navbar = () => {
           <div className="dot mx-3">
             {
               !token ?
-                <button className="navbar-button">Sign In</button>
+                <button onClick={() => navigate("/")} className="navbar-button">Sign In</button>
                 : <div>
                   <span className='user-container'>
                     <img className='img-user' src={token ? image : assets.Profile} alt="" />

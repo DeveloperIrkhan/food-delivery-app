@@ -17,7 +17,6 @@ const Cart = () => {
   const deliveryFee = TotalAmount > 0 ? 10 : 0;
   const navigate = useNavigate()
   const { data: cartItemsDetails, isLoading } = useGetAllItemsQuery();
-  if (!isLoading) { console.log("items", cartItemsDetails) }
   return (
     <>
       {isLoading ? <Spinner /> : <></>}
@@ -67,7 +66,10 @@ const Cart = () => {
                     </dl>
                   </div>
                   <div className="d-flex justify-content-center mt-3">
-                    <Roundedbtn cssClass={"btn cart-button"} text='Proceed to Checkout' onclickFun={() => navigate('/user-orders')} />
+                    {deliveryFee != 0 ?
+                      <Roundedbtn cssClass={"btn cart-button"} text='Proceed to Checkout'
+                        onclickFun={() => navigate('/place-order')} />
+                      : <></>}
                   </div>
                   <div className="d-flex justify-content-center mt-3 top-border">
                     <input className='form-control rounded-0 rounded-start-5' placeholder='Promo Code here' />

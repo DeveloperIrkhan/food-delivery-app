@@ -20,7 +20,7 @@ a {
   background: inherit;
   text-decoration: none;
 }
-.borrdered{
+.borrdered {
   border: 1px solid red;
 }
 hr {
@@ -61,9 +61,8 @@ hr {
   height: 150px;
   width: 250px;
 }
-.uploadimg{
+.uploadimg {
   margin: 10px 10px;
-
 }
 .loading-screen {
   position: absolute;
@@ -78,12 +77,22 @@ hr {
   justify-content: center;
 }
 
-.img-thumbnails{
+.img-thumbnails {
   height: 30vmin;
 }
-.icon-delete{
-  transition: all .5s;
+.icon-delete {
+  transition: all 0.5s;
 }
-.icon-delete:hover{
+.icon-delete:hover {
   color: red;
+}
+
+.dot-bullet {
+  width: 8px; /* Adjust size */
+  height: 8px; /* Adjust size */
+  border-radius: 50%;
+  background-color: #fc7753;
+  display: inline-block; /* Ensure it's inline with text */
+  margin-right: 8px; /* Add some space between bullet and text */
+  flex-shrink: 0;
 }

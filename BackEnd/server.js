@@ -14,7 +14,12 @@ const port = 4000;
 
 // middleware
 app.use(express.json());
-app.use(cors({ origin: ["http://localhost:5173"], credentials: true }));
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "http://localhost:5174"], 
+    credentials: true,
+  })
+);
 
 //Db connction
 ConnectionDb();
@@ -27,8 +32,8 @@ app.use("/api/cart", cartRoute);
 app.use("/api/food", foodRouter);
 app.use("/api/userauth", userRoutes);
 app.use("/images", express.static("uploads"));
-app.get("/", (resp) => {
-  resp.send("API is working");
+app.get("/", (req, res) => {
+  res.send("API is working");
 });
 
 app.use("/api/order", orderRoute);

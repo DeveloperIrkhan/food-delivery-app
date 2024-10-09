@@ -15,6 +15,7 @@ import {
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import Cookies from 'js-cookie';
+import PlaceOrder from './Pages/PlaceOrder/PlaceOrder'
 function App() {
   // const [showLogin, setShowLogin] = useState(false)
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function App() {
           <Route path='home' element={<Home />} />
           <Route path='user-cart' element={<Cart />} />
           <Route path='user-orders' element={<Order />} />
+          <Route path='place-order' element={<PlaceOrder />} />
         </Route>
       </>
     )

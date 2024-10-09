@@ -66,7 +66,23 @@ const PlaceOrderController = async (req, res) => {
       .json({ message: "Order not placed successfully", error: error.message });
   }
 };
-
+// for admin get all the orders from Db
+const GetAllOrdersController = async (req, res) => {
+  try {
+    const userOrders = await OrderModel.find({});
+    return res.status(200).send({
+      success: true,
+      message: "user Orders fetched successfully",
+      totalOrders: userOrders.length,
+      userOrders,
+    });
+  } catch (error) {
+    return res
+      .status(400)
+      .send({ message: "something went wrong!", error: error.message });
+  }
+};
+// user all Orders
 const GetOrdersController = async (req, res) => {
   const userId = req.body.userId;
 
@@ -83,4 +99,4 @@ const GetOrdersController = async (req, res) => {
       .status(400)
       .json({ success: false, message: "something went wrong!" });
 };
-export { PlaceOrderController, GetOrdersController };
+export { PlaceOrderController, GetOrdersController, GetAllOrdersController };
