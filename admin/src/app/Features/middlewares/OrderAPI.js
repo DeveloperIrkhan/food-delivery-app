@@ -5,6 +5,8 @@ export const OrderAPI = createApi({
   reducerPath: "orderAPI",
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:4000/api/order",
+    //       http://localhost:4000/api/order/UpdateStatus
+    //       http://localhost:4000/api/order/Update-Status
     prepareHeaders: (headers) => {
       const token = Cookies.get("accessToken");
       if (token) {
@@ -21,7 +23,14 @@ export const OrderAPI = createApi({
         method: "GET",
       }),
     }),
+    UpdateStatus: builder.mutation({
+      query: ({ OrderId, Status }) => ({
+        url: "/Update-Status",
+        method: "POST",
+        body: { OrderId, Status },
+      }),
+    }),
   }),
 });
 
-export const { useGetAllOrdersQuery } = OrderAPI;
+export const { useGetAllOrdersQuery, useUpdateStatusMutation } = OrderAPI;

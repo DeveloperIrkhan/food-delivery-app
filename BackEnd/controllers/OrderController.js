@@ -6,6 +6,8 @@ const stripeKey = new Stripe(process.env.STRIPE_SECRET_KEY);
 
 //placeing Order
 const PlaceOrderController = async (req, res) => {
+  const frontendUrl = "http://localhost:5173/";
+
   try {
     const userId = req.body.userId;
     if (userId) {
@@ -39,7 +41,6 @@ const PlaceOrderController = async (req, res) => {
         },
         quantity: 1,
       });
-      const frontendUrl = "http://localhost:5173/";
       const session = await stripeKey.checkout.sessions.create({
         line_items: line_items,
         mode: "payment",
@@ -99,4 +100,28 @@ const GetOrdersController = async (req, res) => {
       .status(400)
       .json({ success: false, message: "something went wrong!" });
 };
-export { PlaceOrderController, GetOrdersController, GetAllOrdersController };
+// updating status
+
+const UpdateStatusController = async (req, res) => {
+  try {
+    const OrderId = req.body.OrderId;
+    const Status = req.body.Status;
+    await OrderModel.findByIdAndUpdate(OrderId, { Status });
+    return res.status(200).send({
+      success: true,
+      message: "Status updated successfully",
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).send({
+      success: false,
+      message: "something went wrong",
+    });
+  }
+};
+export {
+  PlaceOrderController,
+  GetOrdersController,
+  GetAllOrdersController,
+  UpdateStatusController,
+};

@@ -56,8 +56,10 @@ import menu_shawarma_2 from "./menu_shawarma_2.jpg";
 import menu_shawarma_3 from "./menu_shawarma_3.jpg";
 import App_store from "./App_store.png";
 import Play_store from "./Play_store.png";
+import OrderIcon from "./OrderIcons.png";
 export const assets = {
   App_store,
+  OrderIcon,
   Play_store,
   TextLogo,
   FullLogo,

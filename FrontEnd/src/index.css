@@ -106,3 +106,23 @@ hr {
 .icon-delete:hover {
   color: red;
 }
+
+
+.bground-primary{
+  background: #4589e7;
+  color: white;
+  padding: 3px;
+  border-radius: 15px;
+}
+.bground-success{
+  background: #f54580;
+  color: white;
+  padding: 3px;
+  border-radius: 15px;
+}
+.bground-secondary{
+  background: #11ba66;
+  color: white;
+  padding: 3px;
+  border-radius: 15px;
+}
